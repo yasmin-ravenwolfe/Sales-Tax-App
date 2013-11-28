@@ -80,6 +80,7 @@ class ShoppingCart
   attr_accessor :items
   def initialize
     @items = []
+    @sales_tax = []
     
   end
   #Add items to a particular cart by pushing into the array
@@ -109,23 +110,30 @@ def item_subtotal
     end
   end
 
-# def calculate_sales_tax
-#   self.items.each do |item|
-#     @sales_tax = 0.0
-#     @sales_tax += item.rounded_tax
-#     puts @sales_tax
-#   end
-# end
+# Add the rounded tax of all items to an array
+# Sum that array to find total sales tax for each cart
+def calculate_sales_tax
+  self.items.each do |item|
+    @sales_tax << item.rounded_tax
+  end
+  # 
+  @sales_tax.inject(0,:+)
+    
+end
   
 def receipt
     self.items.each do |item|
       item.calculate_price
-      # calculate_sales_tax
-    puts "#{item.quantity} #{item.name}: #{item.total_price} with a tax of #{item.rounded_tax}"
+    end
+    total_sales_tax = self.calculate_sales_tax
+    
+    self.items.each do |item|
+    puts "#{item.quantity} #{item.name}: #{item.total_price} with a tax of #{item.rounded_tax}. Total sales tax is #{total_sales_tax}"
+    end
     # puts item.rounded_tax 
     # puts item.quantity
     # puts self.item_quantity(item)
-    end
+    
   end
 
 
