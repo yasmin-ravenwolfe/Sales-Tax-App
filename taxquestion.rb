@@ -28,13 +28,11 @@ class ShoppingCart
     @items << item
     end
   end
-end
 
-class Calculator
   # Calculate the total price of each item including tax
-  def calculator_taxed_price(cart)
+  def calculator
 
-    cart.items.each do |item|
+    self.items.each do |item|
     # For tax-exempt, non-imported items
       if exempt_domestic?(item)
        exempt_domestic(item)
@@ -46,17 +44,17 @@ class Calculator
       # For taxed, non-imported items
       elsif taxable_domestic?(item)
         taxable_domestic(item)
+     
       # For taxed, imported items
       elsif taxable_imported?(item) 
         taxable_imported(item)
-      end     
+      end    
     end
   end
 
-  # method for rounding
 
 
-  # methods for each tax structure
+  # helper methods to determine each tax structure
   def exempt_domestic?(item)
     item.taxable == false && item.imported == false
   end
@@ -70,6 +68,7 @@ class Calculator
     item.taxable == true && item.imported == true
   end
 
+  # helper methods to calculate item price with rounded tax
   def exempt_domestic(item)
     rounded_tax = 0.0
     total_price = item.price
@@ -82,10 +81,13 @@ class Calculator
     puts "#{item.name} costs #{total_price}"
   end
   def taxable_domestic(item)
-    raw_tax = item.price * 0.10
+    raw_tax = (item.price * 10) / 100
     rounded_tax = (raw_tax * 20).ceil / 20.0
-    total_price = item.price + rounded_tax
+    # Because floats use binary numbers, some numbers like 10, will give a random decimal. So, round to 2 decimal places to get correct total price. 
+    # Can use BigDecimal library to avoid; but not in this exercise because it is an external library.
+    total_price = (item.price + rounded_tax).round(2)
     puts "#{item.name} costs #{total_price}"
+    
   end
   def taxable_imported(item)
     raw_tax = (item.price * 15)/100
@@ -93,15 +95,19 @@ class Calculator
     total_price = item.price + rounded_tax  
     puts "#{item.name} costs #{total_price}"
   end
-  # all are called in a receipt method 
-  
+  # all are called in a receipt method   
 end
 
 
 
 class Receipt
   # print receipt 
+  def initialize
+  end
 
+  def receipt(cart)
+    
+  end
   def item_quantity
     # for receipt will need to only print each unique item once, but multipled by its total_price
     total_items_price = item.price * self.find_cart_quantity(item)
@@ -123,14 +129,20 @@ item3_1 = Item.new("bottle of perfume",27.99, true, true)
 item3_2 = Item.new("bottle of perfume", 18.99, true, false)
 item3_3 = Item.new("packet of headache pills", 9.75)
 item3_4 = Item.new("box of chocolates", 11.25, false, true)
+
 cart1 = ShoppingCart.new
+cart2 = ShoppingCart.new
+cart3 = ShoppingCart.new
+
 cart1.add_item_to_cart(item1_1)
 cart1.add_item_to_cart(item1_2)
 cart1.add_item_to_cart(item1_3)
-cart1.add_item_to_cart(item2_1)
-cart1.add_item_to_cart(item2_2)
-cart1.add_item_to_cart(item3_1)
-cart1.add_item_to_cart(item3_2)
-cart1.add_item_to_cart(item3_3)
-cart1.add_item_to_cart(item3_4)
+
+cart2.add_item_to_cart(item2_1)
+cart2.add_item_to_cart(item2_2)
+
+cart3.add_item_to_cart(item3_1)
+cart3.add_item_to_cart(item3_2)
+cart3.add_item_to_cart(item3_3)
+cart3.add_item_to_cart(item3_4)
 
