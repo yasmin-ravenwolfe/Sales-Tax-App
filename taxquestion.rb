@@ -49,13 +49,13 @@ class Item
     def exempt_domestic
       @rounded_tax = 0.0
       @total_price = self.price
-      puts "#{self.name} costs #{total_price}"
+      # puts "#{self.name} costs #{total_price}"
     end
     def exempt_imported
       raw_tax = (self.price * 5) / 100
       @rounded_tax = (raw_tax * 20).ceil / 20.0
       @total_price = self.price + @rounded_tax
-      puts "#{self.name} costs #{total_price}"
+      # puts "#{self.name} costs #{total_price}"
     end
     def taxable_domestic
       raw_tax = (self.price * 10) / 100
@@ -63,14 +63,14 @@ class Item
       # Because floats use binary numbers, some numbers like 10, will give a random decimal. So, round to 2 decimal places to get correct total price. 
       # Can use BigDecimal library to avoid; but not in this exercise because it is an external library.
       @total_price = (self.price + @rounded_tax).round(2)
-      puts "#{self.name} costs #{total_price}"
+      # puts "#{self.name} costs #{total_price}"
       
     end
     def taxable_imported
       raw_tax = (item.price * 15)/100
       @rounded_tax = (raw_tax * 20).ceil / 20.0
       @total_price = item.price + @rounded_tax  
-      puts "#{item.name} costs #{total_price}"
+      # puts "#{item.name} costs #{total_price}"
     end
 end
 
@@ -80,6 +80,7 @@ class ShoppingCart
   attr_accessor :items
   def initialize
     @items = []
+    
   end
   #Add items to a particular cart by pushing into the array
   # cart1.add_item_to_cart(item1,2)
@@ -104,16 +105,25 @@ def item_subtotal
   # end
   def find_item_quantity
     self.items.each do |item|
-   @quantity = self.items.count(item)
+    item.quantity = self.items.count(item)
     end
   end
+
+# def calculate_sales_tax
+#   self.items.each do |item|
+#     @sales_tax = 0.0
+#     @sales_tax += item.rounded_tax
+#     puts @sales_tax
+#   end
+# end
   
 def receipt
     self.items.each do |item|
       item.calculate_price
-    print "#{item.quantity} #{item.name}: #{item.total_price}"
-    puts item.rounded_tax 
-    puts item.quantity
+      # calculate_sales_tax
+    puts "#{item.quantity} #{item.name}: #{item.total_price} with a tax of #{item.rounded_tax}"
+    # puts item.rounded_tax 
+    # puts item.quantity
     # puts self.item_quantity(item)
     end
   end
