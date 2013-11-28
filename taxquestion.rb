@@ -32,27 +32,27 @@ class ShoppingCart
   end
 
   # Calculate the total price of each item including tax
-  def calculate_item_price
+  def receipt
 
     self.items.each do |item|
     # For tax-exempt, non-imported items
-      if item.taxable == false && item.imported == false
+      if exempt_domestic?(item)
         total_tax = 0.0
         total_price = item.price
         puts "#{item} costs #{total_price}"
       # For tax-exempt, imported items
-      elsif item.taxable == false && item.imported == true
+      elsif exempt_imported?(item)
         total_tax = item.price * 0.05
         total_price = item.price + total_tax
         puts "#{item} costs #{total_price}"
       # For taxed, non-imported items
-      elsif 
-        item.taxable == true && item.imported == false
+      elsif taxable_domestic?(item)
+        
         total_tax = item.price * 0.10
         total_price = item.price + total_tax
         puts "#{item} costs #{total_price}"
       # For taxed, imported items
-      elsif item.taxable == true && item.imported == true
+      elsif taxable_imported?(item) 
         total_tax = item.price * 0.15
         total_price = item.price + total_tax
         puts "#{item} costs #{total_price}"
@@ -66,10 +66,24 @@ class ShoppingCart
     @items.count(item)
   end
 
-  def total
+  def item_quantity
     # for receipt will need to only print each unique item once, but multipled by its total_price
     total_items_price = item.price * self.find_cart_quantity(item)
   end
+  # methods for each tax structure
+  def exempt_domestic?(item)
+    item.taxable == false && item.imported == false
+  end
+  def exempt_imported?(item)
+    item.taxable == false && item.imported == true
+  end
+  def taxable_domestic(item)
+    item.taxable == true && item.imported == false
+  end
+  def taxable_imported(item)
+    item.taxable == true && item.imported == true
+  end
+  # all are called in a receipt method 
 end
 
 class Calculator
