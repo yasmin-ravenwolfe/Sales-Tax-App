@@ -31,15 +31,32 @@ class ShoppingCart
     end
   end
 
-  def calculate
+  # Calculate the total price of each item including tax
+  def calculate_item_price
 
-    @items.each do |item|
+    self.items.each do |item|
     # For tax-exempt, non-imported items
       if item.taxable == false && item.imported == false
         total_tax = 0.0
         total_price = item.price
-        print item_price
-      end
+        puts "#{item} costs #{total_price}"
+      # For tax-exempt, imported items
+      elsif item.taxable == false && item.imported == true
+        total_tax = item.price * 0.05
+        total_price = item.price + total_tax
+        puts "#{item} costs #{total_price}"
+      # For taxed, non-imported items
+      elsif 
+        item.taxable == true && item.imported == false
+        total_tax = item.price * 0.10
+        total_price = item.price + total_tax
+        puts "#{item} costs #{total_price}"
+      # For taxed, imported items
+      elsif item.taxable == true && item.imported == true
+        total_tax = item.price * 0.15
+        total_price = item.price + total_tax
+        puts "#{item} costs #{total_price}"
+      end     
     end
   end
 
@@ -50,6 +67,7 @@ class ShoppingCart
   end
 
   def total
+    # for receipt will need to only print each unique item once, but multipled by its total_price
     total_items_price = item.price * self.find_cart_quantity(item)
   end
 end
@@ -69,8 +87,13 @@ class Receipt
 end
 
 item1 = Item.new(10.0)
+item2 = Item.new(20.0, false, true)
+item3 = Item.new(100.0, true, false)
+item4 = Item.new(500.0, true, true)
 cart1 = ShoppingCart.new
 cart1.add_item_to_cart(item1, 2)
-item2 = Item.new(20.0)
 cart1.add_item_to_cart(item2)
+cart1.add_item_to_cart(item3)
+cart1.add_item_to_cart(item4)
+
 
