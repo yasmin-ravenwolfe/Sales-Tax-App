@@ -67,9 +67,9 @@ class Item
       
     end
     def taxable_imported
-      raw_tax = (item.price * 15)/100
+      raw_tax = (self.price * 15)/100
       @rounded_tax = (raw_tax * 20).ceil / 20.0
-      @total_price = item.price + @rounded_tax  
+      @total_price = self.price + @rounded_tax  
       # puts "#{item.name} costs #{total_price}"
     end
 end
@@ -117,7 +117,7 @@ def calculate_sales_tax
     @sales_tax << item.rounded_tax
   end
   # 
-  @sales_tax.inject(0,:+)
+  @sales_tax.inject(0,:+).round(2)
     
 end
   
