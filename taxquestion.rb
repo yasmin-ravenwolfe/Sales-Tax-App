@@ -37,25 +37,18 @@ class ShoppingCart
     self.items.each do |item|
     # For tax-exempt, non-imported items
       if exempt_domestic?(item)
-        total_tax = 0.0
-        total_price = item.price
-        puts "#{item} costs #{total_price}"
+       exempt_domestic(item)
+       
       # For tax-exempt, imported items
       elsif exempt_imported?(item)
-        total_tax = item.price * 0.05
-        total_price = item.price + total_tax
-        puts "#{item} costs #{total_price}"
+        exempt_imported(item)
+        
       # For taxed, non-imported items
       elsif taxable_domestic?(item)
-        
-        total_tax = item.price * 0.10
-        total_price = item.price + total_tax
-        puts "#{item} costs #{total_price}"
+        taxable_domestic(item)
       # For taxed, imported items
       elsif taxable_imported?(item) 
-        total_tax = item.price * 0.15
-        total_price = item.price + total_tax
-        puts "#{item} costs #{total_price}"
+        taxable_imported(item)
       end     
     end
   end
@@ -77,11 +70,32 @@ class ShoppingCart
   def exempt_imported?(item)
     item.taxable == false && item.imported == true
   end
-  def taxable_domestic(item)
+  def taxable_domestic?(item)
     item.taxable == true && item.imported == false
   end
-  def taxable_imported(item)
+  def taxable_imported?(item)
     item.taxable == true && item.imported == true
+  end
+
+  def exempt_domestic(item)
+    total_tax = 0.0
+    total_price = item.price
+    puts "#{item} costs #{total_price}"
+  end
+  def exempt_imported(item)
+    total_tax = item.price * 0.05
+    total_price = item.price + total_tax
+    puts "#{item} costs #{total_price}"
+  end
+  def taxable_domestic(item)
+    total_tax = item.price * 0.10
+    total_price = item.price + total_tax
+    puts "#{item} costs #{total_price}"
+  end
+  def taxable_imported(item)
+    total_tax = item.price * 0.15
+    total_price = item.price + total_tax
+    puts "#{item} costs #{total_price}"
   end
   # all are called in a receipt method 
 end
