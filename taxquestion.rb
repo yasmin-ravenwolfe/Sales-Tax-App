@@ -1,12 +1,13 @@
 class Item
   # create item and pass in arguments- quanity and price
   # Optional args: taxable and import; defaults are false
-  attr_reader :name, :price, :taxable, :imported, :rounded_tax, :total_price
+  attr_accessor :name, :price, :taxable, :imported, :rounded_tax, :total_price, :quantity
     def initialize(name, price, taxable= false, imported= false)
       @name = name
       @price = price
       @taxable = taxable
       @imported = imported
+      @quantity = 0
     end
 
     # Calculate the total price of each item including tax
@@ -87,11 +88,35 @@ class ShoppingCart
     # Push item into cart array a specified number of times
     quantity.times do |x|
     @items << item
+    item.quantity += 1
     end
   end
 
+def item_subtotal
+    # for receipt will need to only print each unique item once, but multipled by its total_price
+    self.items.each do |item|
+    subtotal = item.price * cart.items.count(item)
+  end
+    # find_cart_quantity(item)
+  end
+  # def find_cart_quantity(item)
+  #   @items.count(item)
+  # end
+  def find_item_quantity
+    self.items.each do |item|
+   @quantity = self.items.count(item)
+    end
+  end
   
-
+def receipt
+    self.items.each do |item|
+      item.calculate_price
+    print "#{item.quantity} #{item.name}: #{item.total_price}"
+    puts item.rounded_tax 
+    puts item.quantity
+    # puts self.item_quantity(item)
+    end
+  end
 
 
   
@@ -105,27 +130,14 @@ class Receipt
   def initialize
   end
 
-  def receipt(cart)
-    cart.items.each do |item|
-      item.calculate_price
-    end
-  end
-  def item_quantity(item)
-    # for receipt will need to only print each unique item once, but multipled by its total_price
-    total_items_price = item.price * cart.items.count(item)
-    # find_cart_quantity(item)
-  end
-  # def find_cart_quantity(item)
-  #   @items.count(item)
-  # end
-  def find_cart_quantity(cart,item)
-    cart.items.count(item)
-  end
+  
+  
 end
 
 item1_1 = Item.new("book", 12.49)
 item1_2 = Item.new("music CD", 14.99, true, false)
 item1_3 = Item.new("chocolate bar", 0.85)
+item1_4 = Item.new("stuff", 10.0)
 item2_1 = Item.new("box of chocolates", 10.00, false, true)
 item2_2 = Item.new("bottle of perfume",47.50, true, true)
 item3_1 = Item.new("bottle of perfume",27.99, true, true)
@@ -140,6 +152,7 @@ cart3 = ShoppingCart.new
 cart1.add_item_to_cart(item1_1)
 cart1.add_item_to_cart(item1_2)
 cart1.add_item_to_cart(item1_3)
+cart1.add_item_to_cart(item1_4, 3)
 
 cart2.add_item_to_cart(item2_1)
 cart2.add_item_to_cart(item2_2)
