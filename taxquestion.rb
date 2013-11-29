@@ -81,6 +81,7 @@ class ShoppingCart
   def initialize
     @items = []
     @sales_tax = []
+    @receipt_total = []
     
   end
   #Add items to a particular cart by pushing into the array
@@ -102,11 +103,15 @@ class ShoppingCart
     end
   end
 
-  def update_quantity_in_cart(item, quantity)
+  def update_quantity_in_cart(item, new_quantity)
     if @items.include?(item)
-      item.quanity = quantity
-    else
-      puts "Item not found in cart."
+      # if new_quantity = item.quantity
+      #   return
+      # else
+        self.remove_item_from_cart(item)
+        self.add_item_to_cart(item, new_quantity)
+        item.quantity = new_quantity
+      # end
     end
   end
 
@@ -123,19 +128,28 @@ def item_subtotal
   def find_item_quantity
     self.items.each do |item|
     item.quantity = self.items.count(item)
-    item.quantiy
+    puts "#{item.name}: #{item.quantity}"
     end
   end
 
 # Add the rounded tax of all items to an array
 # Sum that array to find total sales tax for each cart
+# Call after iterate through items array to calculate price so that all paramters are updated.
 def calculate_sales_tax
   self.items.each do |item|
     @sales_tax << item.rounded_tax
   end
-  # 
+   
   @sales_tax.inject(0,:+).round(2)
     
+end
+
+def calculate_receipt_total
+  self.items.each do |item|
+    @receipt_total << item.total_price
+  end
+
+  @receipt_total.inject(0,:+).round(2)
 end
   
 def receipt
@@ -143,14 +157,20 @@ def receipt
       item.calculate_price
     end
     total_sales_tax = self.calculate_sales_tax
-    
+    final_receipt_total = self.calculate_receipt_total
+    # Print info for unique members of array
     self.items.uniq.each do |item|
-    puts "#{item.quantity} #{item.name}: #{item.total_price} with a tax of #{item.rounded_tax}. Total sales tax is #{total_sales_tax}"
+      if item.imported == true
+      puts "#{item.quantity} imported #{item.name}: #{item.total_price}"
+      else
+      puts "#{item.quantity} #{item.name}: #{item.total_price}" 
+      end
     end
+    puts "Sales Taxes: #{total_sales_tax}"
+    puts "Total:#{final_receipt_total}"
     # puts item.rounded_tax 
     # puts item.quantity
-    # puts self.item_quantity(item)
-    
+    # puts self.item_quantity(item)   
   end
 
 
@@ -187,14 +207,14 @@ cart3 = ShoppingCart.new
 cart1.add_item_to_cart(item1_1)
 cart1.add_item_to_cart(item1_2)
 cart1.add_item_to_cart(item1_3)
-cart1.add_item_to_cart(item1_4, 3)
+cart1.add_item_to_cart(item1_4)
 
 cart2.add_item_to_cart(item2_1)
 cart2.add_item_to_cart(item2_2)
 
 cart3.add_item_to_cart(item3_1)
 cart3.add_item_to_cart(item3_2)
-cart3.add_item_to_cart(item3_3, 2)
-cart3.add_item_to_cart(item3_4, 2)
+cart3.add_item_to_cart(item3_3)
+cart3.add_item_to_cart(item3_4)
 
 
