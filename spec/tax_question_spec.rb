@@ -1,7 +1,10 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
-require_relative '../taxquestion'
+# require_relative '../tax_question'
+require_relative '../lib/item'
+require_relative '../lib/shopping_cart'
+require_relative '../lib/receipt'
 
 describe Item do
   
