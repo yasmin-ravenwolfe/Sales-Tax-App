@@ -47,30 +47,32 @@ class Item
 
     # helper methods to calculate item price with rounded tax
     def exempt_domestic
-      @rounded_tax = 0.0
-      @total_price = self.price
-      # puts "#{self.name} costs #{total_price}"
+      calculate_tax(0)
+      total_price
     end
+    
     def exempt_imported
-      raw_tax = (self.price * 5) / 100
-      @rounded_tax = (raw_tax * 20).ceil / 20.0
-      @total_price = self.price + @rounded_tax
-      # puts "#{self.name} costs #{total_price}"
+      calculate_tax(5)
+      total_price
     end
+    
     def taxable_domestic
-      raw_tax = (self.price * 10) / 100
-      @rounded_tax = (raw_tax * 20).ceil / 20.0
-      # Because floats use binary numbers, some numbers like 10, will give a random decimal. So, round to 2 decimal places to get correct total price. 
-      # Can use BigDecimal library to avoid; but not in this exercise because it is an external library.
-      @total_price = (self.price + @rounded_tax).round(2)
-      # puts "#{self.name} costs #{total_price}"
-      
+      calculate_tax(10)
+      total_price      
     end
+    
     def taxable_imported
-      raw_tax = (self.price * 15)/100
+      calculate_tax(15)
+      total_price
+    end
+
+    def calculate_tax(n)
+      raw_tax = (self.price * n)/ 100
       @rounded_tax = (raw_tax * 20).ceil / 20.0
-      @total_price = self.price + @rounded_tax  
-      # puts "#{item.name} costs #{total_price}"
+    end
+
+    def total_price
+      @total_price = (self.price + @rounded_tax).round(2)
     end
 end
 
