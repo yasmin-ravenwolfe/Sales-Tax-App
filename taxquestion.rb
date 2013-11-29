@@ -125,6 +125,11 @@ class ShoppingCart
      print_receipt
   end
 
+  def calculate_item_prices
+     self.items.each do |item|
+      item.calculate_taxed_price
+    end
+  end
   # Add the rounded tax of all items to an array
   # Sum that array to find total sales tax for each cart
   # Call after iterate through items array to calculate price so that all paramters are updated.
@@ -143,12 +148,6 @@ class ShoppingCart
     end
 
     @receipt_total.inject(0,:+).round(2)
-  end
-
-  def calculate_item_prices
-     self.items.each do |item|
-      item.calculate_taxed_price
-    end
   end
 
   # Print info for unique members of array

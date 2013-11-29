@@ -1,55 +1,97 @@
-require_relative '../taxquestion.rb'
+require 'rubygems'
+require 'bundler/setup'
+require 'rspec'
+require_relative '../taxquestion'
 
 describe Item do
   
   
-  describe '.initialize' do
-    it 'sets @name, @price, @taxable, and @imported' do
+  describe ".initialize" do
+    
+    context "when the item is tax-exempt and non-imported and taxable and imported parameters are not passed" do
+      it "sets the item's name and price; taxable and imported default to false" do
 
-      item = Item.new('foo', 10.0)
-      expect(item.name).to eq('foo')
-      expect(item.price).to eq(10.0)
-      expect(item.taxable).to eq(false)
-      expect(item.imported).to eq(false)
+        item = Item.new("foo", 10.0)
+       
+        expect(item.name).to eq("foo")
+        expect(item.price).to eq(10.0)
+        expect(item.taxable).to eq(false)
+        expect(item.imported).to eq(false)
+      end
+    end
+    
+    context "when the item is tax-exempt and non-imported and taxable and imported parameters are passed" do
+      it "sets the item's name and price; taxable and imported are set to false" do
+        
+        item = Item.new("foo", 10.0, false, false)
+        
+        expect(item.name).to eq("foo")
+        expect(item.price).to eq(10.0)
+        expect(item.taxable).to eq(false)
+        expect(item.imported).to eq(false)
+      end
+    end
+
+    context "when the item is tax-exempt and imported" do
+      it "sets the item's name and price; taxable is set to false and imported to true" do 
+        
+        item = Item.new("foo", 10.0, false, true)
+        
+        expect(item.name).to eq("foo")
+        expect(item.price).to eq(10.0)
+        expect(item.taxable).to eq(false)
+        expect(item.imported).to eq(true)
+      end
+    end
+
+    context "when the item is taxed and imported" do
+      it "sets the item's name and price; taxable and imported are set to true" do
+
+        item = Item.new("foo", 10.0, true, true)
+        expect(item.name).to eq("foo")
+        expect(item.price).to eq(10.0)
+        expect(item.taxable).to eq(true)
+        expect(item.imported).to eq(true)
+      end
     end
   end
 
-  describe '#exempt_domestic?' do
-    context 'when item is tax-exempt and non-imported' do
-      it 'should return true' do 
+  describe "#exempt_domestic?" do
+    context "when item is tax-exempt and non-imported" do
+      it "should return true" do 
         
-        item = Item.new('foo', 10.0)
+        item = Item.new("foo", 10.0)
         expect(item.exempt_domestic?).to eq(true)
       end
     end
   end
 
-  describe '#exempt_imported?' do
-    context 'when item is tax-exempt and imported' do
-      it 'should return true' do 
+  describe "#exempt_imported?" do
+    context "when item is tax-exempt and imported" do
+      it "should return true" do 
         
-        item = Item.new('foo', 10.0, false, true)
+        item = Item.new("foo", 10.0, false, true)
         expect(item.exempt_imported?).to eq(true)
       end
     end
   end
 
 
-  describe '#taxable_domestic?' do
-    context 'when item is taxed and non-imported' do
-      it 'should return true' do 
+  describe "#taxable_domestic?" do
+    context "when item is taxed and non-imported" do
+      it "should return true" do 
         
-        item = Item.new('foo', 10.0, true, false)
+        item = Item.new("foo", 10.0, true, false)
         expect(item.taxable_domestic?).to eq(true)
       end
     end
   end
 
-  describe '#taxable_imported?' do
-    context 'when item is taxed and imported' do
-      it 'should return true' do 
+  describe "#taxable_imported?" do
+    context "when item is taxed and imported" do
+      it "should return true" do 
         
-        item = Item.new('foo', 10.0, true, true)
+        item = Item.new("foo", 10.0, true, true)
         expect(item.taxable_imported?).to eq(true)
       end
     end
