@@ -11,26 +11,32 @@ class Item
       @quantity = 0
     end
 
+    def view_item
+      puts "#{self.name.capitalize}: #{self.price}. #{self.tax_type}"
+      puts 
+    end
+
+    def 
     # Calculate the total price of each item including tax
     def calculate_taxed_price
 
     # For tax-exempt, non-imported items
-      exempt_domestic if exempt_domestic?
-       
+      puts exempt_domestic if exempt_domestic?  
        
       # For tax-exempt, imported items
-      exempt_imported if exempt_imported?
+      puts exempt_imported if exempt_imported?
         
         
       # For taxed, non-imported items
-      taxable_domestic if taxable_domestic?
+      puts taxable_domestic if taxable_domestic?
         
      
       # For taxed, imported items
-      taxable_imported if taxable_imported?
+      puts taxable_imported if taxable_imported?
             
     end
     
+    protected
     # helper methods to determine each tax structure
     def exempt_domestic?  
       @taxable == false && @imported == false
@@ -195,8 +201,6 @@ protected
     puts "Sales Taxes: #{self.calculate_total_sales_tax}"
     puts "Total:#{self.calculate_receipt_total}"
   end
-
-
 end
 
 

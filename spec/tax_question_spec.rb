@@ -5,6 +5,10 @@ require_relative '../taxquestion'
 
 describe Item do
   
+  before(:each) do
+    Item.send(:public, *Item.protected_instance_methods)  
+    Item.send(:public, *Item.private_instance_methods) 
+  end
   
   describe ".initialize" do
     
@@ -168,6 +172,16 @@ describe Item do
       item = Item.new("foo", 10.0, true, true)
 
       expect(item.taxable_imported).to eq(11.5)
+    end
+  end
+
+  describe "#calculate_taxed_price" do
+    it "returns the item price with sales tax" do
+
+      item = Item.new("foo", 10.0, true, true)
+      item.calculate_taxed_price
+
+      expect(item.total_price).to eq(11.5)
     end
   end
 end
