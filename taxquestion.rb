@@ -129,34 +129,34 @@ class Receipt
 
   attr_accessor :sales_tax, :receipt_total
   
-  def initialize
-    # @cart = cart.items
+  def initialize(cart)
+    @cart = cart.items
   end   
   
-  def purchase(cart)
-     calculate_item_prices(cart)
-     print_receipt(cart)
+  def purchase
+     calculate_item_prices
+     print_receipt
   end
 
-  def calculate_item_prices(cart)
-     cart.items.each do |item|
+  def calculate_item_prices
+     @cart.each do |item|
       item.calculate_taxed_price
     end
   end
   # Add the rounded tax of all items to an array
   # Sum that array to find total sales tax for each cart
   # Call after iterate through items array to calculate price so that all paramters are updated.
-  def calculate_sales_tax(cart)
+  def calculate_sales_tax
     @sales_tax = []
-    cart.items.each do |item|
+    @cart.each do |item|
       @sales_tax << item.rounded_tax
     end    
     @sales_tax.inject(0,:+).round(2)     
   end
 
-  def calculate_receipt_total(cart)
+  def calculate_receipt_total
     @receipt_total = []
-    cart.items.each do |item|
+    @cart.each do |item|
       @receipt_total << item.total_price
     end
 
@@ -164,8 +164,8 @@ class Receipt
   end
 
   # Print info for unique members of array
-  def print_receipt(cart)
-     cart.items.uniq.each do |item|
+  def print_receipt
+     @cart.uniq.each do |item|
       if item.imported == true
       puts "#{item.quantity} imported #{item.name}: #{item.total_price}"
       else
@@ -173,8 +173,8 @@ class Receipt
       end
     end
   
-    puts "Sales Taxes: #{self.calculate_sales_tax(cart)}"
-    puts "Total:#{self.calculate_receipt_total(cart)}"
+    puts "Sales Taxes: #{self.calculate_sales_tax}"
+    puts "Total:#{self.calculate_receipt_total}"
   end
 
 
