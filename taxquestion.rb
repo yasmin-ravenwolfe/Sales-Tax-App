@@ -80,8 +80,8 @@ class ShoppingCart
   attr_accessor :items
   def initialize
     @items = []
-    @sales_tax = []
-    @receipt_total = []
+    @sales_tax = 0
+    @receipt_total = 0
     
   end
   #Add items to a particular cart by pushing into the array
@@ -113,27 +113,34 @@ class ShoppingCart
     end
   end
 
-def item_subtotal
-    # for receipt will need to only print each unique item once, but multipled by its total_price
-    self.items.each do |item|
-    subtotal = item.price * cart.items.count(item)
-  end
-    # find_cart_quantity(item)
-  end
-  # def find_cart_quantity(item)
-  #   @items.count(item)
-  # end
-  def find_item_quantity
-    self.items.each do |item|
-    item.quantity = self.items.count(item)
-    puts "#{item.name}: #{item.quantity}"
+  def view_cart
+    self.items.uniq.each do |item|
+      puts "#{item.name}: #{item.quantity} in cart at #{item.price} each for a total price of #{item.quantity * item.price}"
     end
   end
+
+# def item_subtotal
+#     # for receipt will need to only print each unique item once, but multipled by its total_price
+#     self.items.each do |item|
+#     subtotal = item.price * cart.items.count(item)
+#   end
+#     # find_cart_quantity(item)
+#   end
+#   # def find_cart_quantity(item)
+#   #   @items.count(item)
+#   # end
+#   def find_item_quantity
+#     self.items.each do |item|
+#     item.quantity = self.items.count(item)
+#     puts "#{item.name}: #{item.quantity}"
+#     end
+#   end
 
 # Add the rounded tax of all items to an array
 # Sum that array to find total sales tax for each cart
 # Call after iterate through items array to calculate price so that all paramters are updated.
 def calculate_sales_tax
+  @sales_tax = []
   self.items.each do |item|
     @sales_tax << item.rounded_tax
   end
@@ -143,6 +150,7 @@ def calculate_sales_tax
 end
 
 def calculate_receipt_total
+  @receipt_total = []
   self.items.each do |item|
     @receipt_total << item.total_price
   end
@@ -154,8 +162,7 @@ def receipt
     self.items.each do |item|
       item.calculate_price
     end
-    total_sales_tax = self.calculate_sales_tax
-    final_receipt_total = self.calculate_receipt_total
+    
     # Print info for unique members of array
     self.items.uniq.each do |item|
       if item.imported == true
@@ -164,11 +171,12 @@ def receipt
       puts "#{item.quantity} #{item.name}: #{item.total_price}" 
       end
     end
+    
+    total_sales_tax = self.calculate_sales_tax
+    final_receipt_total = self.calculate_receipt_total
     puts "Sales Taxes: #{total_sales_tax}"
     puts "Total:#{final_receipt_total}"
-    # puts item.rounded_tax 
-    # puts item.quantity
-    # puts self.item_quantity(item)   
+  
   end
 
 
