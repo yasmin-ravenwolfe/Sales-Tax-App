@@ -64,6 +64,13 @@ describe Item do
         expect(item.exempt_domestic?).to eq(true)
       end
     end
+      context "when item is taxed and/or imported" do
+      it "should return false" do 
+        
+        item = Item.new("foo", 10.0, true)
+        expect(item.exempt_domestic?).to eq(false)
+      end
+    end
   end
 
   describe "#exempt_imported?" do
@@ -72,6 +79,13 @@ describe Item do
         
         item = Item.new("foo", 10.0, false, true)
         expect(item.exempt_imported?).to eq(true)
+      end
+    end
+     context "when item is taxed and/or non-imported" do
+      it "should return false" do 
+        
+        item = Item.new("foo", 10.0)
+        expect(item.exempt_imported?).to eq(false)
       end
     end
   end
@@ -85,6 +99,13 @@ describe Item do
         expect(item.taxable_domestic?).to eq(true)
       end
     end
+    context "when item is tax-exempt and/or imported" do
+      it "should return false" do 
+        
+        item = Item.new("foo", 10.0)
+        expect(item.taxable_domestic?).to eq(false)
+      end
+    end
   end
 
   describe "#taxable_imported?" do
@@ -93,6 +114,13 @@ describe Item do
         
         item = Item.new("foo", 10.0, true, true)
         expect(item.taxable_imported?).to eq(true)
+      end
+    end
+      context "when item is tax-exempt and/or non-imported" do
+      it "should return false" do 
+        
+        item = Item.new("foo", 10.0)
+        expect(item.taxable_imported?).to eq(false)
       end
     end
   end
@@ -107,4 +135,42 @@ describe Item do
     end
   end
 
+  describe "#exempt_domestic" do
+    it "should return the item price without added sales tax" do
+      
+      item = Item.new("foo", 10.0)
+
+      expect(item.exempt_domestic).to eq(10.0)
+    end
+  end
+
+  describe "#exempt_imported" do 
+    it "should return the item price with 5% added sales tax" do
+      
+      item = Item.new("foo", 10.0, false, true)
+
+      expect(item.exempt_imported).to eq(10.5)
+    end
+  end
+
+  describe "#taxable_domestic" do 
+    it "should return the item price with 10% added sales tax" do 
+        
+        item = Item.new("foo", 10.0, true)
+
+        expect(item.taxable_domestic).to eq(11.0)
+    end
+  end
+
+  describe "#taxable_imported" do 
+    it "should return the item price with 15% added sales tax" do 
+
+      item = Item.new("foo", 10.0, true, true)
+
+      expect(item.taxable_imported).to eq(11.5)
+    end
+  end
+
 end
+
+
