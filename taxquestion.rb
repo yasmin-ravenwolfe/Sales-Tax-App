@@ -76,7 +76,7 @@ end
 class ShoppingCart
   #create a shopping cart that is an empty array
   # cart1 = ShoppingCart.new
-  attr_accessor :items, :sales_tax, :receipt_total
+  attr_accessor :items
   def initialize
     @items = []
    
@@ -123,32 +123,40 @@ class ShoppingCart
       end
     end
   end
+end
 
-    
-  def purchase
-     calculate_item_prices
-     print_receipt
+class Receipt 
+
+  attr_accessor :sales_tax, :receipt_total
+  
+  def initialize
+    # @cart = cart.items
+  end   
+  
+  def purchase(cart)
+     calculate_item_prices(cart)
+     print_receipt(cart)
   end
 
-  def calculate_item_prices
-     self.items.each do |item|
+  def calculate_item_prices(cart)
+     cart.items.each do |item|
       item.calculate_taxed_price
     end
   end
   # Add the rounded tax of all items to an array
   # Sum that array to find total sales tax for each cart
   # Call after iterate through items array to calculate price so that all paramters are updated.
-  def calculate_sales_tax
+  def calculate_sales_tax(cart)
     @sales_tax = []
-    self.items.each do |item|
+    cart.items.each do |item|
       @sales_tax << item.rounded_tax
     end    
     @sales_tax.inject(0,:+).round(2)     
   end
 
-  def calculate_receipt_total
+  def calculate_receipt_total(cart)
     @receipt_total = []
-    self.items.each do |item|
+    cart.items.each do |item|
       @receipt_total << item.total_price
     end
 
@@ -156,19 +164,17 @@ class ShoppingCart
   end
 
   # Print info for unique members of array
-  def print_receipt
-     self.items.uniq.each do |item|
+  def print_receipt(cart)
+     cart.items.uniq.each do |item|
       if item.imported == true
       puts "#{item.quantity} imported #{item.name}: #{item.total_price}"
       else
       puts "#{item.quantity} #{item.name}: #{item.total_price}" 
       end
     end
-    
-    total_sales_tax = self.calculate_sales_tax
-    final_receipt_total = self.calculate_receipt_total
-    puts "Sales Taxes: #{total_sales_tax}"
-    puts "Total:#{final_receipt_total}"
+  
+    puts "Sales Taxes: #{self.calculate_sales_tax(cart)}"
+    puts "Total:#{self.calculate_receipt_total(cart)}"
   end
 
 
