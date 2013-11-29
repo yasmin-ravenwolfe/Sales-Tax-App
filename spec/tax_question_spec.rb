@@ -98,4 +98,13 @@ describe Item do
   end
 
 
+  describe "#item_total_price" do 
+    it "should return total item price including rounded tax" do
+
+       item = Item.new("foo", 10.0, true, true)
+
+       expect(item.item_total_price(15)).to eq(11.5)
+    end
+  end
+
 end

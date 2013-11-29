@@ -14,21 +14,20 @@ class Item
     def calculate_taxed_price
 
     # For tax-exempt, non-imported items
-      if exempt_domestic?
-       exempt_domestic
+      exempt_domestic if exempt_domestic?
+       
        
       # For tax-exempt, imported items
-      elsif exempt_imported?
-        exempt_imported
+      exempt_imported if exempt_imported?
+        
         
       # For taxed, non-imported items
-      elsif taxable_domestic?
-        taxable_domestic
+      taxable_domestic if taxable_domestic?
+        
      
       # For taxed, imported items
-      elsif taxable_imported?
-        taxable_imported
-      end    
+      taxable_imported if taxable_imported?
+            
     end
     
     # helper methods to determine each tax structure
@@ -46,34 +45,31 @@ class Item
     end
 
     # helper methods to calculate item price with rounded tax
-    def exempt_domestic
-      calculate_tax(0)
-      total_price
+    def exempt_domestic 
+      item_total_price(0)
     end
     
     def exempt_imported
-      calculate_tax(5)
-      total_price
+      item_total_price(5)
     end
     
     def taxable_domestic
-      calculate_tax(10)
-      total_price      
+     
+      item_total_price(10)     
     end
     
     def taxable_imported
-      calculate_tax(15)
-      total_price
+      item_total_price(15)
     end
 
-    def calculate_tax(n)
+    # Calculate tax and total price for each tax type
+    def item_total_price(n)
       raw_tax = (self.price * n)/ 100
       @rounded_tax = (raw_tax * 20).ceil / 20.0
-    end
-
-    def total_price
       @total_price = (self.price + @rounded_tax).round(2)
     end
+
+
 end
 
 class ShoppingCart
