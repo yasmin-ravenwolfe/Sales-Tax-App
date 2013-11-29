@@ -9,7 +9,7 @@ describe Item do
   describe ".initialize" do
     
     context "when the item is tax-exempt and non-imported and taxable and imported parameters are not passed" do
-      it "sets the item's name and price; taxable and imported default to false" do
+      it "creates a new item and sets the item's name and price; taxable and imported default to false" do
 
         item = Item.new("foo", 10.0)
        
@@ -21,7 +21,7 @@ describe Item do
     end
     
     context "when the item is tax-exempt and non-imported and taxable and imported parameters are passed" do
-      it "sets the item's name and price; taxable and imported are set to false" do
+      it "creates a new item and sets the item's name and price; taxable and imported are set to false" do
         
         item = Item.new("foo", 10.0, false, false)
         
@@ -33,7 +33,7 @@ describe Item do
     end
 
     context "when the item is tax-exempt and imported" do
-      it "sets the item's name and price; taxable is set to false and imported to true" do 
+      it "creates a new item and sets the item's name and price; taxable is set to false and imported to true" do 
         
         item = Item.new("foo", 10.0, false, true)
         
@@ -45,7 +45,7 @@ describe Item do
     end
 
     context "when the item is taxed and imported" do
-      it "sets the item's name and price; taxable and imported are set to true" do
+      it "creates a new item and sets the item's name and price; taxable and imported are set to true" do
 
         item = Item.new("foo", 10.0, true, true)
         expect(item.name).to eq("foo")
@@ -170,7 +170,92 @@ describe Item do
       expect(item.taxable_imported).to eq(11.5)
     end
   end
-
 end
+
+describe ShoppingCart do
+  let(:cart) {ShoppingCart.new}
+  let(:item) {Item.new('foo',10)}
+  describe ".initialize" do 
+    it "creates a new shopping cart and sets items to an empty array" do 
+
+      expect(cart.items).to eq([])
+    end
+  end
+
+  describe "#add_item_to_cart" do 
+    it "adds item to cart items array the specified number of times" do
+
+      cart.add_item_to_cart(item, 2)
+
+      expect(cart.items).to eq([item, item])
+    end
+  end
+
+  describe "#remove_item_from_cart" do 
+    context "when item is found in cart" do 
+      it "removes item from cart items array" do 
+
+        cart.remove_item_from_cart(item)
+
+        expect(cart.items).to eq([])
+      end
+    end
+    context "when item is not found in cart" do
+      it "returns an error message" do 
+
+        item2 = Item.new("bar",1.0)
+        cart.remove_item_from_cart(item)
+
+        expect(cart.remove_item_from_cart(item)).to eq("Item not found in cart.")
+      end
+    end
+  end
+
+  describe "#update_quantity_in_cart" do 
+    context "when item is found in cart" do 
+      it "updates the number of times an item is in the cart items array" do 
+
+        cart.add_item_to_cart(item)
+        cart.update_quantity_in_cart(item, 3)
+
+        expect(cart.items).to eq([item, item, item])
+      end
+    end
+
+    context "when item is not found in cart" do
+      it "returns an error message" do
+
+        
+
+        expect(cart.update_quantity_in_cart(item, 3)).to eq("#{item.name.capitalize} not found in cart. Please add it before updating quantity.")
+      end
+    end
+  end
+
+  describe "#view_cart" do 
+    context "when cart items array is empty" do
+      it "returns an error message" do
+        cart2 = ShoppingCart.new
+
+        expect(cart2.view_cart).to eq("Your cart is empty. Please add some items.")
+      end
+    end
+    context "when cart items array is not empty" do
+      it "returns the unique items in cart" do 
+        cart.add_item_to_cart(item, 2)
+
+        expect(cart.view_cart).to eq([item])
+      end
+    end
+  end
+  
+  describe "#calculate_item_prices" do
+    it "returns total price with sales tax added of each item in cart" do 
+    end
+  end
+end
+
+
+
 
 

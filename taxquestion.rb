@@ -1,3 +1,4 @@
+
 class Item
   # create item and pass in arguments- quanity and price
   # Optional args: taxable and import; defaults are false
@@ -75,11 +76,10 @@ end
 class ShoppingCart
   #create a shopping cart that is an empty array
   # cart1 = ShoppingCart.new
-  attr_accessor :items
+  attr_accessor :items, :sales_tax, :receipt_total
   def initialize
     @items = []
-    @sales_tax = 0
-    @receipt_total = 0
+   
     
   end
   #Add items to a particular cart by pushing into the array
@@ -96,6 +96,7 @@ class ShoppingCart
   def remove_item_from_cart(item)
     if @items.include?(item)
       @items.delete(item)
+    "#{item.name.capitalize} removed from cart."
     else
       "Item not found in cart."
     end
@@ -106,14 +107,20 @@ class ShoppingCart
         self.remove_item_from_cart(item)
         self.add_item_to_cart(item, new_quantity)
         item.quantity = new_quantity
+        "#{item.name.capitalize} quantity has been updated to #{item.quantity}."
       else
-        "Item not found in cart. Please add it before updating quantity."
+        "#{item.name.capitalize} not found in cart. Please add it before updating quantity."
     end
   end
 
   def view_cart
-    self.items.uniq.each do |item|
-      puts "#{item.name}: #{item.quantity} in cart at #{item.price} each for a total price of #{item.quantity * item.price}"
+    if self.items.empty?
+      "Your cart is empty. Please add some items."
+    else
+      self.items.uniq.each do |item|
+        puts "#{item.name.capitalize}: #{item.quantity} in cart at #{item.price} each for a total price of #{item.quantity * item.price}. This does not include sales tax."
+
+      end
     end
   end
 
@@ -163,6 +170,8 @@ class ShoppingCart
     puts "Sales Taxes: #{total_sales_tax}"
     puts "Total:#{final_receipt_total}"
   end
+
+
 end
 
 
