@@ -94,6 +94,22 @@ class ShoppingCart
     end
   end
 
+  def remove_item_from_cart(item)
+    if @items.include?(item)
+      @items.delete(item)
+    else
+      "Item not found in cart."
+    end
+  end
+
+  def update_quantity_in_cart(item, quantity)
+    if @items.include?(item)
+      item.quanity = quantity
+    else
+      puts "Item not found in cart."
+    end
+  end
+
 def item_subtotal
     # for receipt will need to only print each unique item once, but multipled by its total_price
     self.items.each do |item|
@@ -107,6 +123,7 @@ def item_subtotal
   def find_item_quantity
     self.items.each do |item|
     item.quantity = self.items.count(item)
+    item.quantiy
     end
   end
 
@@ -127,7 +144,7 @@ def receipt
     end
     total_sales_tax = self.calculate_sales_tax
     
-    self.items.each do |item|
+    self.items.uniq.each do |item|
     puts "#{item.quantity} #{item.name}: #{item.total_price} with a tax of #{item.rounded_tax}. Total sales tax is #{total_sales_tax}"
     end
     # puts item.rounded_tax 
@@ -177,6 +194,7 @@ cart2.add_item_to_cart(item2_2)
 
 cart3.add_item_to_cart(item3_1)
 cart3.add_item_to_cart(item3_2)
-cart3.add_item_to_cart(item3_3)
-cart3.add_item_to_cart(item3_4)
+cart3.add_item_to_cart(item3_3, 2)
+cart3.add_item_to_cart(item3_4, 2)
+
 
