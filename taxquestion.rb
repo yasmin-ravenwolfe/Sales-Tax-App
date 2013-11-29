@@ -120,7 +120,7 @@ class ShoppingCart
   end
 
     
-  def receipt
+  def purchase
      calculate_item_prices
      print_receipt
   end
