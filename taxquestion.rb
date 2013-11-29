@@ -105,13 +105,11 @@ class ShoppingCart
 
   def update_quantity_in_cart(item, new_quantity)
     if @items.include?(item)
-      # if new_quantity = item.quantity
-      #   return
-      # else
         self.remove_item_from_cart(item)
         self.add_item_to_cart(item, new_quantity)
         item.quantity = new_quantity
-      # end
+      else
+        "Item not found in cart. Please add it before updating quantity."
     end
   end
 
