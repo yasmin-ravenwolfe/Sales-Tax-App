@@ -11,12 +11,6 @@ class Item
       @quantity = 0
     end
 
-    def view_item
-      puts "#{self.name.capitalize}: #{self.price}. #{self.tax_type}"
-      puts 
-    end
-
-    def 
     # Calculate the total price of each item including tax
     def calculate_taxed_price
 
