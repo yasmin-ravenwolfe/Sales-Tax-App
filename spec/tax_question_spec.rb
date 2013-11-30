@@ -184,6 +184,14 @@ describe Item do
       expect(item.total_price).to eq(11.5)
     end
   end
+
+  describe "view_taxed_price" do
+    it "returns the total price with tax added" do 
+
+      item = Item.new("foo", 10.0, true, true)
+      expect(item.view_taxed_price).to eq(11.5)
+    end
+  end
 end
 
 describe ShoppingCart do
