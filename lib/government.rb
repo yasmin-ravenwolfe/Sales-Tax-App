@@ -1,10 +1,10 @@
 class Government
 
   def taxable?(description)
-    description !~ /book|chocolate|headache pills/i
+    description !~ /book|chocolate|chocolates|headache pills/i
   end
 
   def imported?(description)
-    description =~ /imported/i
+    description =~ /|imported|/i
   end
 end

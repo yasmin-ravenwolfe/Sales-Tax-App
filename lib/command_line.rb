@@ -13,6 +13,7 @@ class CommandLine
 
     ARGV.each do |path|
       shopping_cart = InventoryFile.new(path).read
+     # puts shopping_cart.items.each {|x| puts x.view_taxed_price}
       shopping_cart.purchase
     end
   end

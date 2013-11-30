@@ -28,7 +28,7 @@ class InventoryFile
   end
 
   def parse(line)
-    line_matcher = /^(\d+) (.+) at (\d+\.\d{2})$/
+    line_matcher = /^(\d+) (.+) (\d+\.\d{2})$/ 
     # + one or more of thing before; . can mean anything; 
     raise "Invalid line: #{line}" unless line_matcher =~ line
     # can put line.inspect
