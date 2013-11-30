@@ -1,12 +1,12 @@
 class ShoppingCart
-
+require 'set'
   attr_accessor :items
   
   # Creates a new shopping cart.
   # Sets @items to an empty array. 
   # 
   def initialize
-    @items = []   
+    @items = Set.new  
   end
   
   # Adds items to a particular cart by pushing into the @items array
@@ -15,7 +15,7 @@ class ShoppingCart
   # 
   def add_item_to_cart(item, quantity=1)
     quantity.times do |x|
-    @items << item
+    @items.add(item)
     item.quantity += 1
     end
   end
@@ -36,8 +36,6 @@ class ShoppingCart
   # 
   def update_quantity_in_cart(item, new_quantity)
     if @items.include?(item)
-        self.remove_item_from_cart(item)
-        self.add_item_to_cart(item, new_quantity)
         item.quantity = new_quantity
         "#{item.name.capitalize} quantity has been updated to #{item.quantity}."
     else
@@ -51,7 +49,7 @@ class ShoppingCart
     if @items.empty?
       "Your cart is empty. Please add some items."
     else
-      @items.uniq.each do |item|
+      @items.each do |item|
         puts "#{item.name.capitalize}: #{item.quantity} in cart at #{item.price} each for a total price of #{item.quantity * item.price}. This does not include sales tax."
 
       end

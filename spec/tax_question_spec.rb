@@ -202,7 +202,7 @@ describe ShoppingCart do
   describe ".initialize" do 
     it "creates a new shopping cart and sets items to an empty array" do 
 
-      expect(cart.items).to eq([])
+      expect(cart.items.size).to eq(0)
     end
   end
 
@@ -211,7 +211,7 @@ describe ShoppingCart do
 
       cart.add_item_to_cart(item, 2)
 
-      expect(cart.items).to eq([item, item])
+      expect(item.quantity).to eq(2)
     end
   end
 
@@ -221,7 +221,7 @@ describe ShoppingCart do
 
         cart.remove_item_from_cart(item)
 
-        expect(cart.items).to eq([])
+        expect(cart.items.size).to eq(0)
       end
     end
     context "when item is not found in cart" do
@@ -242,7 +242,7 @@ describe ShoppingCart do
         cart.add_item_to_cart(item)
         cart.update_quantity_in_cart(item, 3)
 
-        expect(cart.items).to eq([item, item, item])
+        expect(cart.items.size).to eq(1)
       end
     end
 
@@ -266,7 +266,7 @@ describe ShoppingCart do
       it "returns the unique items in cart" do 
         cart.add_item_to_cart(item, 2)
 
-        expect(cart.view_cart).to eq([item])
+        expect(cart.view_cart.to_a).to eq([item])
       end
     end
   end
