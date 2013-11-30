@@ -9,8 +9,7 @@ require_relative '../lib/receipt'
 describe Item do
   
   before(:each) do
-    Item.send(:public, *Item.protected_instance_methods)  
-    Item.send(:public, *Item.private_instance_methods) 
+    Item.send(:public, *Item.protected_instance_methods)   
   end
   
   describe ".initialize" do
@@ -298,7 +297,6 @@ describe Receipt do
   before(:each) do
     cart.add_item_to_cart(item, 2)
     Receipt.send(:public, *Receipt.protected_instance_methods)  
-    Receipt.send(:public, *Receipt.private_instance_methods) 
   end
 
   describe ".initialize" do 

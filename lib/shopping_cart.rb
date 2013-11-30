@@ -1,8 +1,10 @@
 class ShoppingCart
+
+  attr_accessor :items
+  
   # Creates a new shopping cart.
   # Sets @items to an empty array. 
   # 
-  attr_accessor :items
   def initialize
     @items = []   
   end
@@ -46,10 +48,10 @@ class ShoppingCart
   # Prints a list of each item, quantity, item price, and total price for each item in cart.
   # 
   def view_cart
-    if self.items.empty?
+    if @items.empty?
       "Your cart is empty. Please add some items."
     else
-      self.items.uniq.each do |item|
+      @items.uniq.each do |item|
         puts "#{item.name.capitalize}: #{item.quantity} in cart at #{item.price} each for a total price of #{item.quantity * item.price}. This does not include sales tax."
 
       end
@@ -59,7 +61,7 @@ class ShoppingCart
   # Simulates purchasing a cart and prints out a receipt.
   # 
   def purchase
-    if self.items.empty?
+    if @items.empty?
        "Shopping cart is empty. There is nothing to purchase"
     else
       puts "Receipt:"

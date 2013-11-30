@@ -42,7 +42,7 @@ protected
       @sales_tax << item.rounded_tax
     end    
     
-    @sales_tax.inject(0,:+).round(2)    
+    @sales_tax.reduce(0,:+).round(2)    
   end
 
 
@@ -57,7 +57,7 @@ protected
       @receipt_total << item.total_price
     end
    
-    @receipt_total.inject(0,:+).round(2)
+    @receipt_total.reduce(0,:+).round(2)
   end
 
   # Prints receipt information for each unique member of shopping cart.
