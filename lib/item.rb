@@ -7,11 +7,12 @@ class Item
   # Creates item and sets name, price, taxable, and imported attributes.
   # Taxable and imported default to false. 
   # 
-  def initialize(name, price, taxable= false, imported = false)
+  def initialize(name, price)
     @name = name
     @price = price
-    @taxable = taxable
-    @imported = imported
+    government = Government.new
+    @taxable = government.taxable?(name)
+    @imported = government.imported?(name)
     @quantity = 0
   end
 

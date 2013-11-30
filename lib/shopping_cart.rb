@@ -1,6 +1,7 @@
 class ShoppingCart
 
   attr_accessor :items
+  attr_reader :receipt
   
   # Creates a new shopping cart.
   # Sets @items to an empty array. 
@@ -64,8 +65,7 @@ class ShoppingCart
     if @items.empty?
        "Shopping cart is empty. There is nothing to purchase"
     else
-      puts "Receipt:"
-      Receipt.new(self).print 
+      @receipt = Receipt.new(self).print 
     end  
   end
 end
