@@ -31,3 +31,7 @@ cart3.add_item_to_cart(item3_1)
 cart3.add_item_to_cart(item3_2)
 cart3.add_item_to_cart(item3_3)
 cart3.add_item_to_cart(item3_4)
+
+cart1.purchase
+cart2.purchase
+cart3.purchase

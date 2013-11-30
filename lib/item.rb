@@ -69,9 +69,8 @@ class Item
       @rounded_tax = (raw_tax * 20).ceil / 20.0
       @total_price = (self.price + @rounded_tax).round(2)
     end
-
-
 end
+
 
 
 
