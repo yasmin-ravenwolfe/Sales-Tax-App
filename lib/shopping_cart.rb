@@ -1,3 +1,4 @@
+# to change to set
 class ShoppingCart
 
   attr_accessor :items
