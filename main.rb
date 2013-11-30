@@ -55,3 +55,5 @@ puts "\nOutput 2:"
 cart2.purchase
 puts "\nOutput 3:"
 cart3.purchase
+
+puts File.exists? 'lib/item'

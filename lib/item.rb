@@ -21,7 +21,6 @@ class Item
     calculate_taxed_price
     self.total_price
   end
-
   
 
   def to_s
@@ -29,6 +28,7 @@ class Item
   end
   
   # Calculate the total price of each item including tax based on tax type.
+  # After calling this method, total price attribute is set on item.
   # 
   def calculate_taxed_price
 
