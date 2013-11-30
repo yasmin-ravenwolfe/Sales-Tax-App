@@ -11,22 +11,26 @@ class Item
       @quantity = 0
     end
 
+    def view_taxed_price
+      calculate_taxed_price
+      self.total_price
+    end
     # Calculate the total price of each item including tax
     def calculate_taxed_price
 
     # For tax-exempt, non-imported items
-      puts exempt_domestic if exempt_domestic?  
+    exempt_domestic if exempt_domestic?  
        
-      # For tax-exempt, imported items
-      puts exempt_imported if exempt_imported?
-        
-        
-      # For taxed, non-imported items
-      puts taxable_domestic if taxable_domestic?
-        
-     
-      # For taxed, imported items
-      puts taxable_imported if taxable_imported?
+    # For tax-exempt, imported items
+    exempt_imported if exempt_imported?
+      
+      
+    # For taxed, non-imported items
+    taxable_domestic if taxable_domestic?
+      
+   
+    # For taxed, imported items
+    taxable_imported if taxable_imported?
             
     end
     
