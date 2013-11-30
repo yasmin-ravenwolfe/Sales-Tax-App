@@ -39,7 +39,7 @@ protected
     @sales_tax = []
     
     @cart.each do |item|
-      @sales_tax << item.rounded_tax
+      @sales_tax << item.rounded_tax * item.quantity
     end    
     
     @sales_tax.reduce(0,:+).round(2)    
@@ -54,7 +54,7 @@ protected
     @receipt_total = []
     
     @cart.each do |item|
-      @receipt_total << item.total_price
+      @receipt_total << item.total_price * item.quantity
     end
    
     @receipt_total.reduce(0,:+).round(2)
@@ -63,7 +63,7 @@ protected
   # Prints receipt information for each unique member of shopping cart.
   # 
   def create_receipt
-     @cart.uniq.each do |item|
+     @cart.each do |item|
       if item.imported
       puts "#{item.quantity} imported #{item.name}: #{'%.2f' % item.total_price}"
       else
