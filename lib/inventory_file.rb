@@ -24,7 +24,7 @@ class InventoryFile
   end
 
   def serialize(item)
-    "#{item.quantity} #{item.name} %.2f" % item.price #TODO:format 12.00
+    "#{item.quantity} #{item.name} '%.2f' % item.price" #TODO:format 12.00
   end
 
   def parse(line)
