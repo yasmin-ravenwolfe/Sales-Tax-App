@@ -7,7 +7,7 @@ require_relative '../lib/receipt'
 
 module SalesTax
   describe Receipt do 
-    let(:item) {Item.new("foo", 10.0, true, true)}
+    let(:item) {Item.new("imported foo", 10.0)}
     let(:cart) {ShoppingCart.new}
     let(:receipt) {Receipt.new(cart)}
 
