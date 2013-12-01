@@ -1,3 +1,4 @@
+require_relative '../lib/government'
 module SalesTax
   # This class creates new items and sets attributes to determine tax rate.
   # 
