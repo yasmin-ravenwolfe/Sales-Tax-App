@@ -9,7 +9,7 @@ module SalesTax
   # Allows the printing of a receipt for a cart at any time pre- or post-purchase.
   class Receipt 
 
-    attr_reader :sales_tax, :receipt_total, :cart
+    attr_reader :sales_tax, :receipt_total
     
     # Creates a new receipt.
     # Sets @cart equal to the @items array of shopping cart passed in.
@@ -69,17 +69,17 @@ module SalesTax
 
     # Prints receipt information for each unique member of shopping cart.
     # 
-    def create_receipt
-       @cart.each do |item|
+    def create_receipt      
+        @cart.each do |item|
         if item.imported
-        puts "#{item.quantity} imported #{item.name}: #{'%.2f' % item.total_price}"
+         puts "#{item.quantity} imported #{item.name}: #{'%.2f' % item.total_price}"
         else
-        puts "#{item.quantity} #{item.name}: #{'%.2f' % item.total_price}" 
+         puts "#{item.quantity} #{item.name}: #{'%.2f' % item.total_price}" 
         end
       end
     
-      puts "Sales Taxes: #{'%.2f' % self.calculate_total_sales_tax}"
-      puts "Total:#{'%.2f' % self.calculate_receipt_total}"
+       puts "Sales Taxes: #{'%.2f' % self.calculate_total_sales_tax}"
+       puts "Total:#{'%.2f' % self.calculate_receipt_total}"
     end
   end
 end

@@ -4,14 +4,16 @@ require_relative 'receipt'
 module SalesTax
   class ShoppingCart
   require 'set'
-    attr_accessor :items
-    attr_reader :receipt
+    attr_accessor :items, :receipt
+    # attr_reader :receipt
     
     # Creates a new shopping cart.
     # Sets @items to an empty array. 
     # 
     def initialize
       @items = Set.new  
+      # @sales_tax = 0
+      # @
     end
     
     # Adds items to a particular cart by pushing into the @items array
@@ -67,8 +69,12 @@ module SalesTax
       if @items.empty?
          "Shopping cart is empty. There is nothing to purchase"
       else
-        @receipt = Receipt.new(self).print 
+        Receipt.new(self).print 
       end  
+    end
+
+    def receipt
+      puts purchase
     end
   end
 end

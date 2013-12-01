@@ -135,34 +135,7 @@ module SalesTax
       end
     end
 
-    describe "#exempt_domestic" do
-      it "should return the item price without added sales tax" do
-        
-        expect(exempt_domestic_item.exempt_domestic).to eq(10.0)
-      end
-    end
-
-    describe "#exempt_imported" do 
-      it "should return the item price with 5% added sales tax" do
-
-        expect(exempt_imported_item.exempt_imported).to eq(10.5)
-      end
-    end
-
-    describe "#taxable_domestic" do 
-      it "should return the item price with 10% added sales tax" do 
-
-        expect(taxed_domestic_item.taxable_domestic).to eq(11.0)
-      end
-    end
-
-    describe "#taxable_imported" do 
-      it "should return the item price with 15% added sales tax" do 
-
-        expect(taxed_imported_item.taxable_imported).to eq(11.5)
-      end
-    end
-
+    
     describe "#calculate_taxed_price" do
       it "returns the item price with sales tax" do    
 
