@@ -8,8 +8,7 @@ module SalesTax
       @item = item
     end
     
-    # Calculate the total price of each item including tax based on tax type.
-    # After calling this method, total price attribute is set on item.
+    # Calculates total taxed price based on tax type.
     # 
     def calculate_taxed_price
 
@@ -28,14 +27,9 @@ module SalesTax
     taxable_imported if @item.taxable_imported?
             
     end
-    # protected
-    # These methods determine the item's tax type. 
-    # Tax type is set by the item's taxable and imported attributes.
-    # 
 
-protected
-    # These methods to calculate item price with rounded tax based on tax type.
-    #
+    protected
+    
     # Tax-exempt, non-imported items are not taxed.
     # 
     def exempt_domestic
@@ -48,20 +42,20 @@ protected
       item_total_price(5)
     end
     
-    # Taxed, non-imported items are taxed 10%.
+    # Taxable, non-imported items are taxed 10%.
     # 
-    def taxable_domestic
-     
+    def taxable_domestic   
       item_total_price(10)     
     end
     
-    # Taxed, imported items are taxed 15%. 
+    # Taxable, imported items are taxed 15%. 
     # 
     def taxable_imported
       item_total_price(15)
     end
 
-    # Calculate tax rounded up to the nearest 0.05 and total price for each tax type.
+    # Calculates tax rounded up to the nearest 0.05.
+    # Calculates total taxed price.
     # 
     def item_total_price(n)
       raw_tax = (@item.price * n)/ 100

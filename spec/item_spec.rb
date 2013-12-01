@@ -133,6 +133,13 @@ module SalesTax
         expect(taxed_imported_item.view_taxed_price).to eq(11.5)
       end
     end
+
+    describe "#to_s" do 
+      it "returns the name of the item" do 
+
+        expect(exempt_domestic_item.to_s).to eq("chocolate")
+      end
+    end
   end
 end
 

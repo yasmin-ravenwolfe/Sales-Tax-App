@@ -15,17 +15,6 @@ module SalesTax
       end
     end
 
-    describe "#write" do 
-      it "should write to file" do
-        
-        items = [Item.new("1 box of foo", 10.00)]
-        file = double('file') 
-        result = inventory_file.write(items)
-
-        expect(result).to eq(items)
-      end
-    end
-
     describe "#read" do
       it "reads and parses the file and adds items to cart" do 
         
@@ -36,16 +25,6 @@ module SalesTax
         result = inventory_file.read 
 
         expect(result.items.size).to eq(1)
-      end
-    end
-
-    describe "#serialize" do 
-      it "returns the item quanity, name, and price" do 
-      
-        item = Item.new("box of chocolates", 10.00)
-        item.quantity = 1
-        result = inventory_file.serialize(item)
-        expect(result).to eq("1 box of chocolates at 10.00")
       end
     end
 

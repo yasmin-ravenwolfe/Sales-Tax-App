@@ -77,8 +77,7 @@ module SalesTax
       
       expect(item.rounded_tax).to eq(1.00)
       expect(item.total_price).to eq(11.00)
+      end
     end
-  end
-
   end
 end

@@ -1,7 +1,12 @@
 require_relative 'shopping_cart'
 require_relative 'item'
 
+
 module SalesTax
+  # Reads a file.
+  # Parses each line to create a new Item instance.
+  # Adds items to a ShoppingCart instance.
+  # 
   class InventoryFile
 
     attr_reader :path, :cart
@@ -10,14 +15,11 @@ module SalesTax
       @path = path
     end
 
-    def write(items)
-      File.open(@path, 'w') do |file|
-        items.each do |item|
-          file << (serialize(item) + '\n')
-        end
-      end 
-    end
-
+    # Reads the passed in file.
+    # Parses each line of file to create a new Item instance.
+    # Adds Item instance to ShoppingCart instance.
+    # Returns ShoppingCart instance.
+    # 
     def read
       cart = ShoppingCart.new
       File.open(@path, 'r') do |file|
@@ -30,10 +32,9 @@ module SalesTax
     cart
     end
 
-    def serialize(item)
-      "#{item.quantity} #{item.name} at #{'%.2f' % item.price}" 
-    end
-
+    # Parses each line to set Item instance quantity, name, and price attributes.
+    # Returns an array of the Item instance and its quantity.
+    # 
     def parse(line)
       line_matcher = /^(\d+) (.+) at (\d+\.\d{2})$/ 
       # + one or more of thing before; . can mean anything; 

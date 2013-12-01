@@ -107,11 +107,11 @@ To run all tests:
 
 The app has seven classes: Calculator, CommandLine, Government, InventoryFile, Item, Receipt, ShoppingCart. Each class is an abstraction of the real-world object it derives its name from. 
 
-1. The Item class is responsible for creating new items and storing the name, price, taxable, and imported attributes. This class determines the tax type status of each item. If an item is taxable it is taxed at a rate of 10%; tax-exempt items are food, books, and medical supplies. If an item is imported, its is taxed at 5% (this applies to both taxable and tax-exempt items). 
+1. The Item class is responsible for creating new items and storing the name, price, taxable, and imported attributes. This class sets the tax type of each item as determined by the Government class. 
 
 2. The Government class sets the rules for what items are taxable and imported. In this app, only items that contain the following words in their names are tax-exempt: "book, chocolate, chocolates, headache pills." If the item's name contains the word "imported", its imported tax status is set to true.  
 
-3. The ShoppingCart class creates a shopping cart and stored items in a set data structure. Items can be added to and removed from the shopping cart, the quantity of a specific item in the cart can be changed, and the cart's contents can be viewed. When a user is finished shopping, the shopping cart is purchased, and a receipt is printed.
+3. The ShoppingCart class creates a shopping cart and stores items in a set data structure. Items can be added to and removed from the shopping cart, the quantity of a specific item in the cart can be changed, and the cart's contents can be viewed. When a user is finished shopping, the shopping cart is purchased, and a receipt is printed.
 
 4. The Calculator class is responsible for the tax calculations for each item based on its tax type. The rounded sales tax and total taxed item price are calculated. 
 
@@ -124,15 +124,16 @@ The app has seven classes: Calculator, CommandLine, Government, InventoryFile, I
 7. The CommandLine class is responsible for executing the app with a specified input text file and calling the purchase method on the resulting shopping cart. This runs the program and results in a receipt.
 
 ####Flow:
-1. App is executed and a new CommandLine object is created, with an input text file passed to it.
-2. The CommandLine object creates a new InventoryFile object.
-3. The InventoryFile object reads the input file, creates items and shopping cart, and adds items to shopping cart. 
-4. The CommandLine object purchases the shopping cart and a receipt is output.
+1. App is executed and a new CommandLine instance is created, with an input text file passed to it.
+2. The CommandLine instance creates a new InventoryFile instance.
+3. The InventoryFile instance reads the input file and parses it to create Item instances (using the Government class to set tax type). 
+4. The InventoryFile instance creates a ShoppingCart instance. Item instances are added to the ShoppingCart instance. 
+4. The CommandLine instance purchases the shopping cart (which uses the Calculator class to calculate taxed item prices and the Receipt class to calculate total cart price and total sales tax) and a receipt is output.
 
 ###Assumptions:
 
 1. Both item quantity and price are positive integers.
 2. The input data is in the following format:
-"(Quantity)(item) at (price)"
-3. Since the items were limited for the scope of this exercise, only the keywords "book, chocolate, chocolates, headache pills" were used to determine if an item is tax-exempt. This does not include all types of food, books, or medical supplies. 
-3. If an item's name included the word "imported", it was taxed as an imported item.
+"(quantity)(item) at (price)"
+3. Since the items were limited for the scope of this exercise, only the keywords "book, chocolate, chocolates, headache pills" are used to determine if an item is tax-exempt. This does not include all types of food, books, or medical supplies. 
+3. If an item's name includes the word "imported", it is taxed as an imported item.

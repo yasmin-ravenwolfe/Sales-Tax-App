@@ -5,21 +5,22 @@ require_relative 'calculator'
 
 
 module SalesTax  
-  # Responsible for all receipt calculations. 
-  # Allows the printing of a receipt for a cart at any time pre- or post-purchase.
+  # Calculates receipt total and total sales tax. 
+  # Prints a receipt for all items in cart.
+  # 
   class Receipt 
 
     attr_reader :sales_tax, :receipt_total, :cart
     
     # Creates a new receipt.
-    # Sets @cart equal to the @items array of shopping cart passed in.
+    # Sets @cart equal to the items set of shopping cart passed in.
     # 
     def initialize(cart)
       @cart = cart.items
     end   
     
-    # Prints out a receipt for items in cart without purchasing cart.
-    # 
+    # Calculates taxed item prices.
+    # Returns a receipt for cart.
     def print
       if @cart.empty?
         "Shopping cart is empty. Add items before printing a receipt."
@@ -30,7 +31,7 @@ module SalesTax
     end
 
   protected
-    # For each item in cart, calculates the taxed price based on tax type.
+    # Creates a new Calculator instance to calculate each item's taxed price.
     # 
     def calculate_item_prices
       @cart.each do |item|
@@ -38,9 +39,7 @@ module SalesTax
       end
     end
     
-    # Calculates total sales tax for all the cart's items.
-    # Adds the rounded tax of each item to an empty array.
-    # Sums this array.
+    # Calculates total sales tax for all items in shopping cart.
     # 
     def calculate_total_sales_tax
       @sales_tax = []
@@ -53,9 +52,7 @@ module SalesTax
     end
 
 
-    # Calculates grand total for all the cart's items, including tax.
-    # Adds the total price of each item to an empty array.
-    # Sums this array.
+    # Calculates grand total, including tax, of all items in shopping cart. 
     # 
     def calculate_receipt_total
       @receipt_total = []
@@ -67,7 +64,10 @@ module SalesTax
       @receipt_total.reduce(0,:+).round(2)
     end
 
-    # Prints receipt information for each unique member of shopping cart.
+    # Prints receipt for shopping cart. 
+    # Prints quantity, name, and total taxed price for each item.
+    # Prints total sales tax of all items in shopping cart.
+    # Prints total taxed price of all items in shopping cart.
     # 
     def create_receipt      
         @cart.each do |item|

@@ -8,17 +8,14 @@ module SalesTax
     # attr_reader :receipt
     
     # Creates a new shopping cart.
-    # Sets @items to an empty array. 
+    # Sets @items to an empty set. 
     # 
     def initialize
       @items = Set.new  
-      # @sales_tax = 0
-      # @
     end
     
-    # Adds items to a particular cart by pushing into the @items array
-    # By default, adds one items
-    # If quanity is set, will add that number of items to cart and increment quantity
+    # Adds item to shopping cart.
+    # Increments item quantity in shopping cart.
     # 
     def add_item_to_cart(item, quantity=1)
       quantity.times do |x|
@@ -27,20 +24,19 @@ module SalesTax
       end
     end
 
-    # Removes item from @items array
+    # Removes item from shopping cart.
     # 
     def remove_item_from_cart(item)
       if @items.include?(item)
         @items.delete(item)
         item.quantity = 0
-      "#{item.name.capitalize} removed from cart."
+        "#{item.name.capitalize} removed from cart."
       else
         "Item not found in shopping cart."
       end
     end
 
-    # Changes the quantity of an item in the @items array. 
-    # Removes item from @items array in order to avoid duplicates.
+    # Changes the quantity of an item in shopping cart. 
     # 
     def update_quantity_in_cart(item, new_quantity)
       if @items.include?(item)
@@ -51,7 +47,7 @@ module SalesTax
       end
     end
 
-    # Prints a list of each item, quantity, item price, and total price for each item in cart.
+    # Returns a list of each item, quantity, item price, and total untaxed price for each item in cart.
     # 
     def view_cart
       if @items.empty?
@@ -63,7 +59,8 @@ module SalesTax
       end
     end
 
-    # Simulates purchasing a cart and prints out a receipt.
+    # Simulates purchasing a cart. 
+    # Creates a new Receipt instance to print a receipt.
     # 
     def purchase
       if @items.empty?
@@ -71,10 +68,6 @@ module SalesTax
       else
         Receipt.new(self).print 
       end  
-    end
-
-    def receipt
-      puts purchase
     end
   end
 end
