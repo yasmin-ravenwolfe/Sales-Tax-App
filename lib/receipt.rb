@@ -9,7 +9,7 @@ module SalesTax
   # Allows the printing of a receipt for a cart at any time pre- or post-purchase.
   class Receipt 
 
-    attr_reader :sales_tax, :receipt_total
+    attr_reader :sales_tax, :receipt_total, :cart
     
     # Creates a new receipt.
     # Sets @cart equal to the @items array of shopping cart passed in.

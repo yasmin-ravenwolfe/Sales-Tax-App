@@ -17,7 +17,7 @@ module SalesTax
     end
 
     describe ".initialize" do 
-      it "creates a new receipt and sets cart to the items array of shopping cart passed in" do 
+      it "creates a new receipt and sets cart to the items set of shopping cart passed in" do 
 
         expect(receipt.cart).to eq(cart.items)
       end
