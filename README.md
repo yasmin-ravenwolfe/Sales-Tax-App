@@ -1,13 +1,11 @@
-ThoughtWorks Junior Consultant Coding Challenge
-# PROBLEM TWO: SALES TAX
+##ThoughtWorks Junior Consultant Coding Challenge
+##PROBLEM TWO: SALES TAX
 
 This application solves the sales tax problem by simulating an actual shopping experience. Data is input as a text file. Upon purchasing items, a receipt is printed that lists the name of all the items and their price (including tax), total cost, and total sales tax.
 
 Basic sales tax is applicable at a rate of 10% on all goods, except books, food, and medical products that are exempt. Import duty is an additional sales tax applicable on all imported goods at a rate of 5%, with no exemptions.
- 
 
-
-# To run the app:
+###To run the app:
 From the command line, run: checkout input/<filename>.txt
 
 In the input folder, are three input text files with the data from this problem.
@@ -20,7 +18,7 @@ Pass in one of the provided input files in this format to get corresponding outp
   checkout input/input3.txt
     <!-- Results in Output 3 -->
 
-Testing:
+###Testing:
 
 Testing was done using RSpec. Each class has a corresponding test file in the spec folder. 
 
@@ -32,7 +30,7 @@ To run an individual test:
 To run all tests:
   rspec
 
-#Design: 
+###Design: 
 
 The app has seven classes: Calculator, CommandLine, Government, InventoryFile, Item, Receipt, ShoppingCart. Each class is an abstraction of the real-world object it derives its name from. 
 
@@ -52,13 +50,13 @@ The app has seven classes: Calculator, CommandLine, Government, InventoryFile, I
 
 7. The CommandLine class is responsible for executing the app with a specified input text file and calling the purchase method on the resulting shopping cart. This runs the program and results in a receipt.
 
-- Flow:
+####Flow:
 1. App is executed and a new CommandLine object is created, with an input text file passed to it.
 2. The CommandLine object creates a new InventoryFile object.
 3. The InventoryFile object reads the input file, creates items and shopping cart, and adds items to shopping cart. 
 4. The CommandLine object purchases the shopping cart and a receipt is output.
 
-#Assumptions:
+###Assumptions:
 
 1. Both item quantity and price are positive integers.
 2. The input data is in the following format:
