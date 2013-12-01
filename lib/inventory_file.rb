@@ -14,7 +14,6 @@ module SalesTax
       File.open(@path, 'w') do |file|
         items.each do |item|
           file << (serialize(item) + '\n')
-          # return serialize(item)
         end
       end 
     end
@@ -32,7 +31,7 @@ module SalesTax
     end
 
     def serialize(item)
-      "#{item.quantity} #{item.name} at #{'%.2f' % item.price}" #TODO:format 12.00
+      "#{item.quantity} #{item.name} at #{'%.2f' % item.price}" 
     end
 
     def parse(line)

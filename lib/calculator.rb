@@ -1,4 +1,5 @@
 require_relative 'item'
+
 module SalesTax
   class Calculator
   attr_reader :item
