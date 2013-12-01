@@ -3,6 +3,8 @@ require 'bundler/setup'
 require 'rspec'
 
 require_relative '../lib/receipt'
+require_relative '../lib/item'
+require_relative '../lib/government'
 
 describe Receipt do 
   let(:item) {Item.new("foo", 10.0, true, true)}
