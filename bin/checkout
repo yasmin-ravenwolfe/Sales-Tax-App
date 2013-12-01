@@ -2,5 +2,4 @@
 
 require_relative '../lib/command_line'
 SalesTax::CommandLine.new(ARGV)
-# CommandLine.new(ARGV)
 
