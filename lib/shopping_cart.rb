@@ -1,5 +1,5 @@
-require_relative '../lib/item'
-require_relative '../lib/receipt'
+require_relative 'item'
+require_relative 'receipt'
 
 module SalesTax
   class ShoppingCart

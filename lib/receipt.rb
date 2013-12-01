@@ -1,6 +1,6 @@
-require_relative '../lib/item'
-require_relative '../lib/government'
-require_relative '../lib/shopping_cart'
+require_relative 'item'
+require_relative 'government'
+require_relative 'shopping_cart'
 module SalesTax  
   # Responsible for all receipt calculations. 
   # Allows the printing of a receipt for a cart at any time pre- or post-purchase.

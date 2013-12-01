@@ -1,5 +1,11 @@
+require_relative 'shopping_cart'
+require_relative 'item'
+
 module SalesTax
   class InventoryFile
+
+    attr_reader :path, :cart
+
     def initialize(path)
       @path = path
     end
