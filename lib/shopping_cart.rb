@@ -1,9 +1,5 @@
 
 class ShoppingCart
-
-# TODO: to change to setparse
-# 
-class ShoppingCart
 require 'set'
   attr_accessor :items
   attr_reader :receipt
@@ -57,7 +53,6 @@ require 'set'
     else
       @items.each do |item|
         puts "#{item.name.capitalize}: #{item.quantity} in cart at #{item.price} each for a total price of #{item.quantity * item.price}. This does not include sales tax."
-
       end
     end
   end
@@ -71,4 +66,5 @@ require 'set'
       @receipt = Receipt.new(self).print 
     end  
   end
+
 end
