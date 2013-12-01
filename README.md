@@ -5,7 +5,7 @@ This application solves the sales tax problem by simulating an actual shopping e
 
 Basic sales tax is applicable at a rate of 10% on all goods, except books, food, and medical products that are exempt. Import duty is an additional sales tax applicable on all imported goods at a rate of 5%, with no exemptions.
 
-Thi application prints out the receipt details for these shopping baskets: 
+This application prints out the receipt details for these shopping baskets: 
 
 #####INPUT:
  
@@ -87,7 +87,9 @@ Results in Output 2:
 Results in Output 3: 
   checkout input/input3.txt
 
-- The app can also be run entirely in the command line. In IRB, run lib/command_line.rb. The classes can be instantiated to create items and shopping carts, and all methods can be run in order to alter the cart and purchase it. This will result in a receipt being output for each custom "shopping experience."
+###### Custom Shopping Experience
+
+This app can also be run entirely in the command line. In IRB, run lib/command_line.rb. The classes can be instantiated to create items and shopping carts, and all methods can be run in order to alter the cart and purchase it. This will result in a receipt being output for each custom "shopping experience."
 
 ###Testing:
 
@@ -96,7 +98,7 @@ Testing was done using RSpec. Each class has a corresponding test file in the sp
 Run bundle install to install the RSpec testing gem.
 
 To run an individual test:
-  rspec spec/<filename>.rb
+  rspec spec/"filename".rb
 
 To run all tests:
   rspec
