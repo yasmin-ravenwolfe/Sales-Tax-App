@@ -1,6 +1,9 @@
 require_relative 'item'
 require_relative 'government'
 require_relative 'shopping_cart'
+require_relative 'calculator'
+
+
 module SalesTax  
   # Responsible for all receipt calculations. 
   # Allows the printing of a receipt for a cart at any time pre- or post-purchase.
@@ -31,7 +34,7 @@ module SalesTax
     # 
     def calculate_item_prices
       @cart.each do |item|
-        item.calculate_taxed_price   
+        Calculator.new(item).calculate_taxed_price(item)   
       end
     end
     
