@@ -1,3 +1,6 @@
+require_relative '../lib/item'
+require_relative '../lib/receipt'
+
 module SalesTax
   class ShoppingCart
   require 'set'
@@ -27,9 +30,10 @@ module SalesTax
     def remove_item_from_cart(item)
       if @items.include?(item)
         @items.delete(item)
+        item.quantity = 0
       "#{item.name.capitalize} removed from cart."
       else
-        "Item not found in cart."
+        "Item not found in shopping cart."
       end
     end
 
@@ -41,7 +45,7 @@ module SalesTax
           item.quantity = new_quantity
           "#{item.name.capitalize} quantity has been updated to #{item.quantity}."
       else
-        "#{item.name.capitalize} not found in cart. Please add it before updating quantity."
+        "#{item.name.capitalize} not found in shopping cart. Please add it before updating quantity."
       end
     end
 
@@ -49,10 +53,10 @@ module SalesTax
     # 
     def view_cart
       if @items.empty?
-        "Your cart is empty. Please add some items."
+        "Your shopping cart is empty. Please add some items."
       else
         @items.each do |item|
-          puts "#{item.name.capitalize}: #{item.quantity} in cart at #{item.price} each for a total price of #{item.quantity * item.price}. This does not include sales tax."
+          puts "#{item.name.capitalize}: #{item.quantity} in shopping cart at #{item.price} each for a total price of #{item.quantity * item.price}. This does not include sales tax."
         end
       end
     end
