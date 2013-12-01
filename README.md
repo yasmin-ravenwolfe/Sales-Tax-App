@@ -1,4 +1,4 @@
-##ThoughtWorks Junior Consultant Coding Challenge
+####ThoughtWorks Junior Consultant Coding Challenge
 ###PROBLEM TWO: SALES TAX
 
 This application solves the sales tax problem by simulating an actual shopping experience. Data is input as a text file. Upon purchasing items, a receipt is printed that lists the name of all the items and their price (including tax), total cost, and total sales tax.
