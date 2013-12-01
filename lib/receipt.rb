@@ -34,7 +34,7 @@ module SalesTax
     # 
     def calculate_item_prices
       @cart.each do |item|
-        Calculator.new(item).calculate_taxed_price(item)   
+        Calculator.new(item).calculate_taxed_price  
       end
     end
     
