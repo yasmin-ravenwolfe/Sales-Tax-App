@@ -127,22 +127,6 @@ module SalesTax
       end
     end
 
-
-    describe "#item_total_price" do 
-      it "should return total item price including rounded tax" do
-
-         expect(taxed_imported_item.item_total_price(15)).to eq(11.5)
-      end
-    end
-
-    
-    describe "#calculate_taxed_price" do
-      it "returns the item price with sales tax" do    
-
-        expect(taxed_imported_item.calculate_taxed_price).to eq(11.5)
-      end
-    end
-
     describe "view_taxed_price" do
       it "returns the total price with tax added" do 
 
