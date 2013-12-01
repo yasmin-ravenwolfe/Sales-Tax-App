@@ -6,9 +6,9 @@ This application solves the sales tax problem by simulating an actual shopping e
 Basic sales tax is applicable at a rate of 10% on all goods, except books, food, and medical products that are exempt. Import duty is an additional sales tax applicable on all imported goods at a rate of 5%, with no exemptions.
 
 ###To run the app:
-From the command line, run: checkout input/"filename".txt
+- From the command line, run: checkout input/"filename".txt
 
-In the input folder, are three input text files with the data from this problem.
+In the input folder are three input text files with the data from this problem.
 
 Pass in one of the provided input files in this format to get corresponding output in the form of a receipt.
   
@@ -20,6 +20,8 @@ Results in Output 2:
 
 Results in Output 3: 
   checkout input/input3.txt
+
+- The app can also be run entirely in the command line. In IRB, run lib/command_line.rb. The classes can be instantiated to create items and shopping carts, and all methods can be run in order to alter the cart and purchase it. This will result in a receipt being output for each custom "shopping experience."
 
 ###Testing:
 
@@ -39,17 +41,17 @@ The app has seven classes: Calculator, CommandLine, Government, InventoryFile, I
 
 1. The Item class is responsible for creating new items and storing the name, price, taxable, and imported attributes. This class determines the tax type status of each item. If an item is taxable it is taxed at a rate of 10%; tax-exempt items are food, books, and medical supplies. If an item is imported, its is taxed at 5% (this applies to both taxable and tax-exempt items). 
 
-2. The Government class sets the rules for what items are taxable and imported. In this app, only items that contain the following words in their names are tax-exempt: "book, chocolate, chocolates, headache pills." If the item's name contains the word "imported", it's imported tax status is set to true.  
+2. The Government class sets the rules for what items are taxable and imported. In this app, only items that contain the following words in their names are tax-exempt: "book, chocolate, chocolates, headache pills." If the item's name contains the word "imported", its imported tax status is set to true.  
 
-3. The ShoppingCart class creates a cart in which to store items. Items can be added to and removed from the shopping cart, the quantity of a specific item in the cart can be changed, and the cart's contents can be viewed. When a user is finished shopping, the shopping cart is purchased, and a receipt is printed.
+3. The ShoppingCart class creates a shopping cart and stored items in a set data structure. Items can be added to and removed from the shopping cart, the quantity of a specific item in the cart can be changed, and the cart's contents can be viewed. When a user is finished shopping, the shopping cart is purchased, and a receipt is printed.
 
-4. The Calculator class is responsible for the for tax calculations for each item based on it's tax type. The rounded sales tax and total taxed item price are calculated. 
+4. The Calculator class is responsible for the tax calculations for each item based on its tax type. The rounded sales tax and total taxed item price are calculated. 
 
 5. The Receipt class is responsible for calculating the shopping cart sales tax and grand total. It is through this class that a receipt is printed out.
 
 - Two classes are responsible for reading input data from text files so that the app can execute:
 
-6. The InventoryFile class reads text files, parses input data so that items can be created, and adds these items to a shopping cart. The data is parsed so that each line of an input text file is a unique item. Each line is parsed using regular expression into three groupings. The first is the quantity, the second is the item name, and the third is the price ("at" is excluded). This data is used to create a new item and add it to the cart according to its quantity.
+6. The InventoryFile class reads text files, parses input data so that items can be created, and adds these items to a shopping cart. The data is parsed so that each line of an input text file is a unique item. Each line is parsed using regular expressions into three groupings. The first is the quantity, the second is the item name, and the third is the price (the word "at" is excluded). This data is used to create a new item and add it to the cart according to its quantity.
 
 7. The CommandLine class is responsible for executing the app with a specified input text file and calling the purchase method on the resulting shopping cart. This runs the program and results in a receipt.
 
