@@ -12,12 +12,14 @@ In the input folder, are three input text files with the data from this problem.
 
 Pass in one of the provided input files in this format to get corresponding output in the form of a receipt.
   
-  Results in Output 1:
-    checkout input/input1.txt
-  Results in Output 2:
-    checkout input/input2.txt
-  Results in Output 3: 
-    checkout input/input3.txt
+Results in Output 1:
+  checkout input/input1.txt
+
+Results in Output 2:
+  checkout input/input2.txt
+
+Results in Output 3: 
+  checkout input/input3.txt
 
 ###Testing:
 
