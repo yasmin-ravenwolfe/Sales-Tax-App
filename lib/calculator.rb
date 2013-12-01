@@ -4,6 +4,7 @@ module SalesTax
     def initialize(item)
       @item = item
     end
+    
     # Calculate the total price of each item including tax based on tax type.
     # After calling this method, total price attribute is set on item.
     # 
@@ -29,7 +30,7 @@ module SalesTax
     # Tax type is set by the item's taxable and imported attributes.
     # 
 
-
+protected
     # These methods to calculate item price with rounded tax based on tax type.
     #
     # Tax-exempt, non-imported items are not taxed.

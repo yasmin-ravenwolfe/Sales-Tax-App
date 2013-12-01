@@ -1,10 +1,13 @@
 require_relative 'government'
+require_relative 'calculator'
+
 module SalesTax
   # This class creates new items and sets attributes to determine tax rate.
   # 
   class Item
    
-    attr_accessor :name, :price, :taxable, :imported, :rounded_tax, :total_price, :quantity
+    attr_accessor :rounded_tax, :total_price, :quantity
+    attr_reader :name, :price, :taxable, :imported
     
     # Creates item and sets name, price, taxable, and imported attributes.
     # Taxable and imported default to false. 
@@ -21,8 +24,9 @@ module SalesTax
     # Prints total price, including tax, for item.
     # 
     def view_taxed_price
-      calculate_taxed_price
-      self.total_price
+      Calculator.new(self).calculate_taxed_price
+      
+      total_price
     end
     
 
