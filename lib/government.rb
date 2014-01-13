@@ -5,7 +5,8 @@ module SalesTax
 
     # Returns true if description does not include the specified words.
     # Returns false if description includes the specified words.
-    # 
+    #   
+    
     def taxable?(description)
       if description =~ /book|chocolate|chocolates|headache pills/i
         false
@@ -24,5 +25,7 @@ module SalesTax
         false
       end
     end
+    
+
   end
 end

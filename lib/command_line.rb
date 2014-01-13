@@ -1,9 +1,9 @@
 require_relative 'item'
 require_relative 'shopping_cart'
-require_relative 'receipt'
+require_relative 'register'
 require_relative 'inventory_file'
 require_relative 'government'
-require_relative "calculator"
+require_relative "item_calculator"
 
 module SalesTax
   # Executes the application by passing in an input file.

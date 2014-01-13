@@ -1,8 +1,11 @@
 require_relative 'item'
 require 'bigdecimal'
+require "pry"
 
+# Calculates the tax and total price for a single item.
+# 
 module SalesTax
-  class Calculator
+  class ItemCalculator
   attr_reader :item
   
     def initialize(item)
@@ -12,7 +15,6 @@ module SalesTax
     # Calculates total taxed price based on tax type.
     # 
     def calculate_taxed_price
-
     # For tax-exempt, non-imported items.
     exempt_domestic if item.exempt_domestic?  
        

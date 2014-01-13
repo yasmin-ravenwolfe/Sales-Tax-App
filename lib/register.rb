@@ -1,15 +1,18 @@
 require_relative 'item'
 require_relative 'government'
 require_relative 'shopping_cart'
-require_relative 'calculator'
+require_relative 'item_calculator'
 require 'bigdecimal'
 
-
+# Acts like a register at a store.
+# Initiates total calculations and prints receipt.
+# Delegates the calculation of an individual item to the Calculator class but is responsible for calculations that occur upon checkout.
+#
 module SalesTax  
   # Calculates receipt total and total sales tax. 
   # Prints a receipt for all items in cart.
   # 
-  class Receipt 
+  class Register 
 
     attr_reader :cart
     
@@ -22,12 +25,12 @@ module SalesTax
     
     # Calculates taxed item prices.
     # Returns a receipt for cart.
-    def print
+    def checkout
       if cart.empty?
         "Shopping cart is empty. Add items before printing a receipt."
       else
        calculate_item_prices
-       create_receipt
+       print_receipt
      end
     end
 
@@ -36,7 +39,7 @@ module SalesTax
     # 
     def calculate_item_prices
       cart.each do |item|
-        Calculator.new(item).calculate_taxed_price  
+        ItemCalculator.new(item).calculate_taxed_price  
       end
     end
     
@@ -70,7 +73,7 @@ module SalesTax
     # Prints total sales tax of all items in shopping cart.
     # Prints total taxed price of all items in shopping cart.
     # 
-    def create_receipt      
+    def print_receipt      
       cart.each do |item|
      
        puts "#{item.quantity} #{item.name}: #{'%.2f' % item.total_price}" 

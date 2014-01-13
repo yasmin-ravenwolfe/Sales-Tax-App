@@ -8,6 +8,7 @@ module SalesTax
   # Parses each line to create a new Item instance.
   # Adds items to a ShoppingCart instance.
   # 
+  # Acts like a shopper - reads shopping list and adds to cart.
   class InventoryFile
     attr_reader :path, :cart
 
