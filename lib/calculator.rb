@@ -14,18 +14,18 @@ module SalesTax
     def calculate_taxed_price
 
     # For tax-exempt, non-imported items.
-    exempt_domestic if @item.exempt_domestic?  
+    exempt_domestic if item.exempt_domestic?  
        
     # For tax-exempt, imported items.
-    exempt_imported if @item.exempt_imported?
+    exempt_imported if item.exempt_imported?
       
       
     # For taxed, non-imported items.
-    taxable_domestic if @item.taxable_domestic?
+    taxable_domestic if item.taxable_domestic?
       
    
     # For taxed, imported items.
-    taxable_imported if @item.taxable_imported?
+    taxable_imported if item.taxable_imported?
             
     end
 
@@ -61,9 +61,8 @@ module SalesTax
     # 
     def item_total_price(n)
       raw_tax = BigDecimal.new("#{(@item.price * n)/ 100}")
-      @item.rounded_tax = BigDecimal.new("#{(raw_tax * 20).ceil / 20.0}")
-      # @item.rounded_tax = BigDecimal.new("#{(((@item.price * n)/ 100) * 20).ceil / 20.0}")
-      @item.total_price = BigDecimal.new("#{(@item.price + @item.rounded_tax)}")
+      item.rounded_tax = BigDecimal.new("#{(raw_tax * 20).ceil / 20.0}")
+      item.total_price = BigDecimal.new("#{(@item.price + @item.rounded_tax)}")
     end
   end
 end

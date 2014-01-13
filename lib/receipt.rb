@@ -10,7 +10,7 @@ module SalesTax
   # 
   class Receipt 
 
-    attr_reader :sales_tax, :receipt_total, :cart
+    attr_reader :cart
     
     # Creates a new receipt.
     # Sets @cart equal to the items set of shopping cart passed in.
@@ -22,7 +22,7 @@ module SalesTax
     # Calculates taxed item prices.
     # Returns a receipt for cart.
     def print
-      if @cart.empty?
+      if cart.empty?
         "Shopping cart is empty. Add items before printing a receipt."
       else
        calculate_item_prices
@@ -34,7 +34,7 @@ module SalesTax
     # Creates a new Calculator instance to calculate each item's taxed price.
     # 
     def calculate_item_prices
-      @cart.each do |item|
+      cart.each do |item|
         Calculator.new(item).calculate_taxed_price  
       end
     end
