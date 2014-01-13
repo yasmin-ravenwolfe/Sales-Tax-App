@@ -1,5 +1,6 @@
 require_relative 'shopping_cart'
 require_relative 'item'
+require 'bigdecimal'
 
 
 module SalesTax
@@ -8,7 +9,6 @@ module SalesTax
   # Adds items to a ShoppingCart instance.
   # 
   class InventoryFile
-
     attr_reader :path, :cart
 
     def initialize(path)
@@ -37,13 +37,12 @@ module SalesTax
     # 
     def parse(line)
       line_matcher = /^(\d+) (.+) at (\d+\.\d{2})$/ 
-      # + one or more of thing before; . can mean anything; 
+    
       raise "Invalid line: #{line}" unless line_matcher =~ line
-      # can put line.inspect
       matches = line_matcher.match(line)
       quantity = matches[1].to_i
       name = matches[2]
-      price = matches[3].to_f
+      price = BigDecimal.new("#{matches[3]}")
       item = Item.new(name, price)
 
       [item, quantity]

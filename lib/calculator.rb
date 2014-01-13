@@ -1,4 +1,5 @@
 require_relative 'item'
+require 'bigdecimal'
 
 module SalesTax
   class Calculator
@@ -56,11 +57,13 @@ module SalesTax
 
     # Calculates tax rounded up to the nearest 0.05.
     # Calculates total taxed price.
+    # Use BigDecimal(versus floats) for precision because dealing with money.
     # 
     def item_total_price(n)
-      raw_tax = (@item.price * n)/ 100
-      @item.rounded_tax = (raw_tax * 20).ceil / 20.0
-      @item.total_price = (@item.price + @item.rounded_tax).round(2)
+      raw_tax = BigDecimal.new("#{(@item.price * n)/ 100}")
+      @item.rounded_tax = BigDecimal.new("#{(raw_tax * 20).ceil / 20.0}")
+      # @item.rounded_tax = BigDecimal.new("#{(((@item.price * n)/ 100) * 20).ceil / 20.0}")
+      @item.total_price = BigDecimal.new("#{(@item.price + @item.rounded_tax)}")
     end
   end
 end

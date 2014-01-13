@@ -48,7 +48,7 @@ module SalesTax
         @sales_tax << item.rounded_tax * item.quantity
       end    
       
-      @sales_tax.reduce(0,:+).round(2)    
+      @sales_tax.reduce(0,:+)    
     end
 
 
@@ -61,7 +61,7 @@ module SalesTax
         @receipt_total << item.total_price * item.quantity
       end
      
-      @receipt_total.reduce(0,:+).round(2)
+      @receipt_total.reduce(0,:+)
     end
 
     # Prints receipt for shopping cart. 
