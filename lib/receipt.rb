@@ -2,6 +2,7 @@ require_relative 'item'
 require_relative 'government'
 require_relative 'shopping_cart'
 require_relative 'calculator'
+require 'bigdecimal'
 
 
 module SalesTax  
@@ -42,26 +43,26 @@ module SalesTax
     # Calculates total sales tax for all items in shopping cart.
     # 
     def calculate_total_sales_tax
-      @sales_tax = []
+      sales_tax = []
       
-      @cart.each do |item|
-        @sales_tax << item.rounded_tax * item.quantity
+      cart.each do |item|
+        sales_tax << BigDecimal.new("#{item.rounded_tax * item.quantity}")
       end    
       
-      @sales_tax.reduce(0,:+)    
+      sales_tax.reduce(0,:+)    
     end
 
 
     # Calculates grand total, including tax, of all items in shopping cart. 
     # 
     def calculate_receipt_total
-      @receipt_total = []
+      receipt_total = []
       
-      @cart.each do |item|
-        @receipt_total << item.total_price * item.quantity
+      cart.each do |item|
+        receipt_total << BigDecimal.new("#{item.total_price * item.quantity}")
       end
      
-      @receipt_total.reduce(0,:+)
+      receipt_total.reduce(0,:+)
     end
 
     # Prints receipt for shopping cart. 
@@ -70,7 +71,7 @@ module SalesTax
     # Prints total taxed price of all items in shopping cart.
     # 
     def create_receipt      
-        @cart.each do |item|
+        cart.each do |item|
         if item.imported
          puts "#{item.quantity} imported #{item.name}: #{'%.2f' % item.total_price}"
         else
