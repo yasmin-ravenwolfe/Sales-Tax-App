@@ -33,7 +33,7 @@ module SalesTax
     end
 
     # Parses each line to set Item instance quantity, name, and price attributes.
-    # Returns an array of the Item instance and its quantity.
+    # Returns an array of the Item instance and its quantity to be added to cart in read.
     # 
     def parse(line)
       line_matcher = /^(\d+) (.+) at (\d+\.\d{2})$/ 

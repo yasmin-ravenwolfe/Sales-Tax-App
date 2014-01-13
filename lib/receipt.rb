@@ -72,11 +72,9 @@ module SalesTax
     # 
     def create_receipt      
         cart.each do |item|
-        if item.imported
-         puts "#{item.quantity} imported #{item.name}: #{'%.2f' % item.total_price}"
-        else
+       
          puts "#{item.quantity} #{item.name}: #{'%.2f' % item.total_price}" 
-        end
+        
       end
     
        puts "Sales Taxes: #{'%.2f' % self.calculate_total_sales_tax}"
