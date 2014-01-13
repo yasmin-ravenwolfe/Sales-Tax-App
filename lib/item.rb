@@ -19,6 +19,7 @@ module SalesTax
       @taxable = government.taxable?(name)
       @imported = government.imported?(name)
       @quantity = 0
+      @total_price = nil
     end
 
     # Creates a new calculator instance to calculate total taxed price.
@@ -27,7 +28,6 @@ module SalesTax
     def view_taxed_price
       Calculator.new(self).calculate_taxed_price
       
-      total_price
     end
     
     # These methods determine the item's tax type based on taxable and imported attributes. 

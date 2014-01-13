@@ -71,14 +71,14 @@ module SalesTax
     # Prints total taxed price of all items in shopping cart.
     # 
     def create_receipt      
-        cart.each do |item|
-       
-         puts "#{item.quantity} #{item.name}: #{'%.2f' % item.total_price}" 
-        
+      cart.each do |item|
+     
+       puts "#{item.quantity} #{item.name}: #{'%.2f' % item.total_price}" 
+      
       end
-    
-       puts "Sales Taxes: #{'%.2f' % self.calculate_total_sales_tax}"
-       puts "Total:#{'%.2f' % self.calculate_receipt_total}"
+  
+     puts "Sales Taxes: #{'%.2f' % self.calculate_total_sales_tax}"
+     puts "Total:#{'%.2f' % self.calculate_receipt_total}"
     end
   end
 end
