@@ -28,6 +28,7 @@ module SalesTax
     def view_taxed_price
       Calculator.new(self).calculate_taxed_price
       
+      '%.2f' % self.total_price
     end
     
     # These methods determine the item's tax type based on taxable and imported attributes. 
